@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MeloWrite — The Pixel Art DAW</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0a0a0a;
+      color: #ffffff;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ---- NAV ---- */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 1.2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(10, 10, 10, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(83, 11, 64, 0.3);
+    }
+
+    .nav-logo {
+      font-family: 'Space Mono', monospace;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #ff0000;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #ffffff;
+    }
+
+    /* ---- HERO ---- */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+    }
+
+    .hero::before {
+      display: none;
+    }
+
+    .logo-mark {
+      margin-bottom: 2rem;
+    }
+
+    .logo-mark img {
+      height: 160px;
+      image-rendering: pixelated;
+      image-rendering: -moz-crisp-edges;
+      image-rendering: crisp-edges;
+    }
+
+.tagline {
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      color: #ccc;
+      max-width: 500px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.6;
+    }
+
+    .tagline span {
+      color: #ff0000;
+    }
+
+    /* ---- BUTTONS ---- */
+    .btn-buy {
+      display: inline-block;
+      padding: 1rem 3rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #fff;
+      background: #530b40;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .btn-buy:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-buy:active {
+      transform: translateY(0);
+    }
+
+    /* ---- VIDEO ---- */
+    .video-section {
+      padding: 4rem 2rem 6rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .video-wrapper {
+      width: 100%;
+      max-width: 900px;
+      aspect-ratio: 16 / 9;
+      background: #111;
+      border-radius: 12px;
+      border: 1px solid rgba(83, 11, 64, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .video-wrapper::before {
+      display: none;
+    }
+
+    .play-btn {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      border: 2px solid rgba(83, 11, 64, 0.6);
+      background: rgba(83, 11, 64, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      z-index: 1;
+    }
+
+    .play-btn:hover {
+      background: rgba(83, 11, 64, 0.4);
+      border-color: #ff0000;
+      transform: scale(1.08);
+    }
+
+    .play-btn svg {
+      width: 28px;
+      height: 28px;
+      margin-left: 4px;
+    }
+
+    /* ---- FEATURES GRID ---- */
+    .features-section {
+      padding: 4rem 2rem 6rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .features-heading {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .features-heading h2 {
+      font-family: 'Space Mono', monospace;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      margin-bottom: 0.8rem;
+      color: #ffffff;
+    }
+
+    .features-heading p {
+      color: #666;
+      font-size: 1rem;
+    }
+
+    .features-row {
+      margin-bottom: 3rem;
+    }
+
+    .features-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .features-row-header {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #ff0000;
+      margin-bottom: 1.2rem;
+      padding-left: 0.2rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .feature-card {
+      background: #111;
+      border: 1px solid #1a1a1a;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .feature-card:hover {
+      border-color: #530b40;
+      transform: translateY(-4px);
+    }
+
+    .feature-gif {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      background: #161616;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid #1a1a1a;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-gif::before {
+      display: none;
+    }
+
+    .feature-gif-placeholder {
+      color: #333;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      z-index: 1;
+    }
+
+    .feature-info {
+      padding: 1.2rem 1.4rem 1.4rem;
+    }
+
+    .feature-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #ff0000;
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      color: #ffffff;
+    }
+
+    .feature-desc {
+      font-size: 0.85rem;
+      color: #bbb;
+      line-height: 1.5;
+    }
+
+    /* ---- BOTTOM CTA ---- */
+    .bottom-cta {
+      padding: 6rem 2rem 8rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .bottom-cta::before {
+      display: none;
+    }
+
+    .bottom-cta h2 {
+      font-family: 'Space Mono', monospace;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      margin-bottom: 1rem;
+      color: #ff0000;
+    }
+
+    .bottom-cta p {
+      color: #666;
+      margin-bottom: 2.5rem;
+      font-size: 1rem;
+    }
+
+    /* ---- FOOTER ---- */
+    footer {
+      border-top: 1px solid #1a1a1a;
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: #444;
+    }
+
+    footer a {
+      color: #666;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    footer a:hover {
+      color: #ff0000;
+    }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 768px) {
+      .features-grid {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+      }
+
+      nav {
+        padding: 1rem 1.5rem;
+      }
+
+      .nav-links {
+        gap: 1rem;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 0.8rem;
+        text-align: center;
+      }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">MeloWrite</div>
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#buy">Buy</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="logo-mark">
+      <img src="melowritelogolarge2.png" alt="MeloWrite">
+    </div>
+    <p class="tagline">The <span>pixel-art spirit</span> DAW. Minimal. MIDI-only. Handcrafted for musicians who want to write music, not fight software.</p>
+    <a href="#buy" class="btn-buy">Buy Now</a>
+  </section>
+
+  <!-- VIDEO -->
+  <section class="video-section">
+    <div class="video-wrapper">
+      <div class="play-btn">
+        <svg viewBox="0 0 24 24" fill="#ff0000" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="6,3 20,12 6,21"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features-section" id="features">
+    <div class="features-heading">
+      <h2>Built different.</h2>
+      <p>Every feature exists because it makes writing music faster.</p>
+    </div>
+
+    <!-- ROW 1: COMPOSE -->
+    <div class="features-row">
+      <div class="features-row-header">Compose</div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-gif"><span class="feature-gif-placeholder">[ gif ]</span></div>
+          <div class="feature-info">
+            <div class="feature-title">Procedural Chords</div>
+            <p class="feature-desc">Generate chord progressions that fit your song. Pick a feel, get chords that work. Theory optional.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-gif"><span class="feature-gif-placeholder">[ gif ]</span></div>
+          <div class="feature-info">
+            <div class="feature-title">Scale Locking</div>
+            <p class="feature-desc">Lock to a scale and swap between them freely. Every note you place is always in key.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-gif"><span class="feature-gif-placeholder">[ gif ]</span></div>
+          <div class="feature-info">
+            <div class="feature-title">MIDI Draw &amp; Recording</div>
+            <p class="feature-desc">Draw notes directly, overdub layers, and capture multi MIDI takes. Safe playback with locking so you never lose work.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROW 2: SOUND -->
+    <div class="features-row">
+      <div class="features-row-header">Sound</div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-gif"><span class="feature-gif-placeholder">[ gif ]</span></div>
+          <div class="feature-info">
+            <div class="feature-title">Built-in Instruments</div>
+            <p class="feature-desc">A full synthesizer, a dedicated NES synth, and 500 beautiful built-in samples. Ready to go out of the box.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-gif"><span class="feature-gif-placeholder">[ gif ]</span></div>
+          <div class="feature-info">
+            <div class="feature-title">Samplers</div>
+            <p class="feature-desc">Built-in sampler and multi drum sampler with random multi-hit and per-velocity sample triggering for expressive playback.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-gif"><span class="feature-gif-placeholder">[ gif ]</span></div>
+          <div class="feature-info">
+            <div class="feature-title">Built-in Effects</div>
+            <p class="feature-desc">Delay, reverb, chorus, and more. Shape your sound without leaving the app.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROW 3: WORKFLOW -->
+    <div class="features-row">
+      <div class="features-row-header">Workflow</div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-gif"><span class="feature-gif-placeholder">[ gif ]</span></div>
+          <div class="feature-info">
+            <div class="feature-title">Chunks &amp; Arrangement</div>
+            <p class="feature-desc">Build reusable chunks, chain them into patterns, and arrange full songs. Non-destructive and fast.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-gif"><span class="feature-gif-placeholder">[ gif ]</span></div>
+          <div class="feature-info">
+            <div class="feature-title">Drag &amp; Drop Everything</div>
+            <p class="feature-desc">Drop in soundfonts, MIDI files, and samples. Auto palette creation from soundfonts. Zero setup.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-gif"><span class="feature-gif-placeholder">[ gif ]</span></div>
+          <div class="feature-info">
+            <div class="feature-title">Instrument Palettes</div>
+            <p class="feature-desc">Prebuilt swappable instrument palettes. Switch your entire sound in one click or auto-generate palettes from soundfonts.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROW 4: POWER -->
+    <div class="features-row">
+      <div class="features-row-header">Power</div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-gif"><span class="feature-gif-placeholder">[ gif ]</span></div>
+          <div class="feature-info">
+            <div class="feature-title">Dedicated Audio Engine</div>
+            <p class="feature-desc">A separate audio engine decoupled from the UI. Built for realtime playback in game engines and embedded applications.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-gif"><span class="feature-gif-placeholder">[ gif ]</span></div>
+          <div class="feature-info">
+            <div class="feature-title">Export Anything</div>
+            <p class="feature-desc">Export chunks, patterns, and full arrangements as MIDI or audio. Your music, your format.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-gif"><span class="feature-gif-placeholder">[ gif ]</span></div>
+          <div class="feature-info">
+            <div class="feature-title">Fully Remappable</div>
+            <p class="feature-desc">Every shortcut is yours to change. Make MeloWrite work the way you think.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOTTOM CTA -->
+  <section class="bottom-cta" id="buy">
+    <h2>Start writing music.</h2>
+    <p>No subscriptions. No bloat. Just a tool that works.</p>
+    <a href="#" class="btn-buy">Buy Now</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>&copy; 2026 MeloWrite</span>
+    <span><a href="#">Twitter</a> &middot; <a href="#">Discord</a> &middot; <a href="#">GitHub</a></span>
+  </footer>
+
+</body>
+</html>
