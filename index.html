@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MeloWrite — The Pixel Art DAW</title>
+  <title>MeloWrite</title>
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     * {
@@ -229,15 +229,9 @@
 
     .feature-card {
       background: #111;
-      border: 1px solid #1a1a1a;
+      border: none;
       border-radius: 12px;
       overflow: hidden;
-      transition: border-color 0.3s, transform 0.3s;
-    }
-
-    .feature-card:hover {
-      border-color: #530b40;
-      transform: translateY(-4px);
     }
 
     .feature-gif {
@@ -247,7 +241,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      border-bottom: 1px solid #1a1a1a;
+      border-radius: 12px;
       position: relative;
       overflow: hidden;
     }
@@ -380,9 +374,9 @@
   <!-- HERO -->
   <section class="hero">
     <div class="logo-mark">
-      <img src="melowritelogolarge2.png" alt="MeloWrite">
+      <img src="melowritelogo.png" alt="MeloWrite">
     </div>
-    <p class="tagline">The <span>pixel-art spirit</span> DAW. Minimal. MIDI-only. Handcrafted for musicians who want to write music, not fight software.</p>
+    <p class="tagline">The best way to make music on your computer</p>
     <a href="#buy" class="btn-buy">Buy Now</a>
   </section>
 
@@ -401,7 +395,7 @@
   <section class="features-section" id="features">
     <div class="features-heading">
       <h2>Built different.</h2>
-      <p>Every feature exists because it makes writing music faster.</p>
+      <p>A program that gets out of your way.</p>
     </div>
 
     <!-- ROW 1: COMPOSE -->
@@ -412,21 +406,21 @@
           <div class="feature-gif"><span class="feature-gif-placeholder">[ gif ]</span></div>
           <div class="feature-info">
             <div class="feature-title">Procedural Chords</div>
-            <p class="feature-desc">Generate chord progressions that fit your song. Pick a feel, get chords that work. Theory optional.</p>
+            <p class="feature-desc"> Create chord progressions and melodies with the push of button, be a player or a tastemaker</p>
           </div>
         </div>
         <div class="feature-card">
           <div class="feature-gif"><span class="feature-gif-placeholder">[ gif ]</span></div>
           <div class="feature-info">
             <div class="feature-title">Scale Locking</div>
-            <p class="feature-desc">Lock to a scale and swap between them freely. Every note you place is always in key.</p>
+            <p class="feature-desc">Detect and swap scales. Go from triumphant to moody or mysterious with a click, and with scale locking, every note you play is always in key.</p>
           </div>
         </div>
         <div class="feature-card">
           <div class="feature-gif"><span class="feature-gif-placeholder">[ gif ]</span></div>
           <div class="feature-info">
             <div class="feature-title">MIDI Draw &amp; Recording</div>
-            <p class="feature-desc">Draw notes directly, overdub layers, and capture multi MIDI takes. Safe playback with locking so you never lose work.</p>
+            <p class="feature-desc">Draw notes directly, overdub layers or capture multi MIDI takes and choose your favorite.</p>
           </div>
         </div>
       </div>
@@ -440,14 +434,14 @@
           <div class="feature-gif"><span class="feature-gif-placeholder">[ gif ]</span></div>
           <div class="feature-info">
             <div class="feature-title">Built-in Instruments</div>
-            <p class="feature-desc">A full synthesizer, a dedicated NES synth, and 500 beautiful built-in samples. Ready to go out of the box.</p>
+            <p class="feature-desc">A full synthesizer, a dedicated NES synth, and 500 beautiful built-in samples and drum kits. All free to use in your projects, right out of the box..</p>
           </div>
         </div>
         <div class="feature-card">
           <div class="feature-gif"><span class="feature-gif-placeholder">[ gif ]</span></div>
           <div class="feature-info">
             <div class="feature-title">Samplers</div>
-            <p class="feature-desc">Built-in sampler and multi drum sampler with random multi-hit and per-velocity sample triggering for expressive playback.</p>
+            <p class="feature-desc">Built-in sampler and multi drum sampler with random multi-hit for sound effects and per-velocity sample triggering for expressive playback.</p>
           </div>
         </div>
         <div class="feature-card">
@@ -468,21 +462,21 @@
           <div class="feature-gif"><span class="feature-gif-placeholder">[ gif ]</span></div>
           <div class="feature-info">
             <div class="feature-title">Chunks &amp; Arrangement</div>
-            <p class="feature-desc">Build reusable chunks, chain them into patterns, and arrange full songs. Non-destructive and fast.</p>
+            <p class="feature-desc">Build reusable chunks, and arrange full songs.</p>
           </div>
         </div>
         <div class="feature-card">
           <div class="feature-gif"><span class="feature-gif-placeholder">[ gif ]</span></div>
           <div class="feature-info">
             <div class="feature-title">Drag &amp; Drop Everything</div>
-            <p class="feature-desc">Drop in soundfonts, MIDI files, and samples. Auto palette creation from soundfonts. Zero setup.</p>
+            <p class="feature-desc">It just works: drop in soundfonts, MIDI files, samples or folders. Zero setup.</p>
           </div>
         </div>
         <div class="feature-card">
           <div class="feature-gif"><span class="feature-gif-placeholder">[ gif ]</span></div>
           <div class="feature-info">
             <div class="feature-title">Instrument Palettes</div>
-            <p class="feature-desc">Prebuilt swappable instrument palettes. Switch your entire sound in one click or auto-generate palettes from soundfonts.</p>
+            <p class="feature-desc">Prebuilt swappable instrument palettes. Switch your entire sound in one click.</p>
           </div>
         </div>
       </div>
@@ -496,14 +490,14 @@
           <div class="feature-gif"><span class="feature-gif-placeholder">[ gif ]</span></div>
           <div class="feature-info">
             <div class="feature-title">Dedicated Audio Engine</div>
-            <p class="feature-desc">A separate audio engine decoupled from the UI. Built for realtime playback in game engines and embedded applications.</p>
+            <p class="feature-desc">A separate audio engine decoupled from the UI. Built for realtime playback in your application or favorite game engine. Unity plugin included.</p>
           </div>
         </div>
         <div class="feature-card">
           <div class="feature-gif"><span class="feature-gif-placeholder">[ gif ]</span></div>
           <div class="feature-info">
             <div class="feature-title">Export Anything</div>
-            <p class="feature-desc">Export chunks, patterns, and full arrangements as MIDI or audio. Your music, your format.</p>
+            <p class="feature-desc">Export chunks, patterns, and full arrangements as MIDI or audio.</p>
           </div>
         </div>
         <div class="feature-card">
