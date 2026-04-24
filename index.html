@@ -12,9 +12,26 @@
       box-sizing: border-box;
     }
 
+    :root {
+      --background: #000000;
+      --accent: #e11d55;
+      --complement: #9652c8;
+      --text: #f7f7f7;
+      --subtext: #c4c4c4;
+      --line: 2px;
+    }
+
+    [data-theme="light"] {
+      --background: #ffffff;
+      --accent: #9652c8;
+      --complement: #e11d55;
+      --text: #000000;
+      --subtext: #525252;
+    }
+
     body {
-      background: #0a0a0a;
-      color: #ffffff;
+      background: var(--background);
+      color: var(--text);
       font-family: 'Inter', sans-serif;
       overflow-x: hidden;
     }
@@ -29,16 +46,43 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(10, 10, 10, 0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(83, 11, 64, 0.3);
+      background: var(--background);
+      border-bottom: var(--line) solid var(--complement);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .theme-toggle {
+      background: transparent;
+      border: var(--line) solid var(--accent);
+      color: var(--text);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 0.5rem 0.9rem;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background 0.2s, color 0.2s;
+      width: 5.5rem;
+      text-align: center;
+    }
+
+    .theme-toggle:hover {
+      background: var(--accent);
+      color: var(--background);
     }
 
     .nav-logo {
       font-family: 'Space Mono', monospace;
       font-size: 1.1rem;
       font-weight: 700;
-      color: #ff0000;
+      color: var(--accent);
       letter-spacing: 2px;
       text-transform: uppercase;
     }
@@ -50,7 +94,7 @@
     }
 
     .nav-links a {
-      color: #aaa;
+      color: var(--subtext);
       text-decoration: none;
       font-size: 0.85rem;
       letter-spacing: 1px;
@@ -59,7 +103,7 @@
     }
 
     .nav-links a:hover {
-      color: #ffffff;
+      color: var(--text);
     }
 
     /* ---- HERO ---- */
@@ -89,16 +133,20 @@
       image-rendering: crisp-edges;
     }
 
+    .logo-mark .logo-light { display: none; }
+    [data-theme="light"] .logo-mark .logo-dark { display: none; }
+    [data-theme="light"] .logo-mark .logo-light { display: inline; }
+
 .tagline {
       font-size: clamp(1rem, 2vw, 1.3rem);
-      color: #ccc;
+      color: var(--subtext);
       max-width: 500px;
       margin: 0 auto 2.5rem;
       line-height: 1.6;
     }
 
     .tagline span {
-      color: #ff0000;
+      color: var(--accent);
     }
 
     /* ---- BUTTONS ---- */
@@ -111,8 +159,8 @@
       letter-spacing: 2px;
       text-transform: uppercase;
       text-decoration: none;
-      color: #fff;
-      background: #530b40;
+      color: #ffffff;
+      background: var(--complement);
       border: none;
       border-radius: 6px;
       cursor: pointer;
@@ -138,9 +186,9 @@
       width: 100%;
       max-width: 900px;
       aspect-ratio: 16 / 9;
-      background: #111;
+      background: var(--background);
       border-radius: 12px;
-      border: 1px solid rgba(83, 11, 64, 0.3);
+      border: var(--line) solid var(--complement);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -156,8 +204,8 @@
       width: 72px;
       height: 72px;
       border-radius: 50%;
-      border: 2px solid rgba(83, 11, 64, 0.6);
-      background: rgba(83, 11, 64, 0.3);
+      border: calc(var(--line) * 2) solid var(--complement);
+      background: var(--complement);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -167,8 +215,8 @@
     }
 
     .play-btn:hover {
-      background: rgba(83, 11, 64, 0.4);
-      border-color: #ff0000;
+      background: var(--accent);
+      border-color: var(--accent);
       transform: scale(1.08);
     }
 
@@ -180,7 +228,7 @@
 
     /* ---- FEATURES GRID ---- */
     .features-section {
-      padding: 4rem 2rem 6rem;
+      padding: 4rem 2rem 0;
       max-width: 1100px;
       margin: 0 auto;
     }
@@ -194,20 +242,186 @@
       font-family: 'Space Mono', monospace;
       font-size: clamp(1.6rem, 3vw, 2.2rem);
       margin-bottom: 0.8rem;
-      color: #ffffff;
+      color: var(--text);
     }
 
     .features-heading p {
-      color: #666;
+      color: var(--subtext);
       font-size: 1rem;
     }
 
     .features-row {
-      margin-bottom: 3rem;
+      margin-bottom: 0;
     }
 
     .features-row:last-child {
       margin-bottom: 0;
+    }
+
+    /* ---- SNAKE PATH ---- */
+    /* heading underline -> corner extension -> vertical drop -> row side bar
+       -> full-width connector -> mirror -> final underline at bottom cta */
+
+    .features-heading {
+      margin-bottom: 0;
+    }
+
+    .heading-line {
+      display: flex;
+      align-items: flex-end;
+      margin-bottom: 0;
+    }
+
+    /* 12px-tall bars sit flush to the bottom of the flex row, on the same
+       baseline as the h2's border-bottom — no sub-pixel drift */
+    .heading-side {
+      flex: 1;
+      height: 12px;
+      min-width: 0;
+    }
+
+    .heading-side--bar-right,
+    .heading-side--bar-left {
+      background: var(--accent);
+    }
+
+    .features-heading h2,
+    .bottom-cta h2 {
+      display: inline-block;
+      padding-bottom: 0.8rem;
+      margin-bottom: 0;
+      border-bottom: 12px solid var(--accent);
+    }
+
+    .snake-connector {
+      height: 12px;
+      background: var(--accent);
+      width: 100%;
+      margin: 0;
+    }
+
+    /* .heading-after sits directly below the heading-line inside .features-heading,
+       so its top is exactly at the h2 underline y. The vertical bar pseudo-element
+       spans from that y down to row 1's top, closing the gap. */
+    .heading-after {
+      position: relative;
+      padding: 1.2rem 0 2rem;
+    }
+
+    .heading-after--right::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      width: 12px;
+      background: var(--accent);
+    }
+
+    .features-row {
+      position: relative;
+      padding: 2rem 2.2rem;
+    }
+
+    .features-row--right::before,
+    .features-row--left::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 12px;
+      background: var(--accent);
+    }
+
+    .features-row--right::before { right: 0; }
+    .features-row--left::before  { left: 0; }
+
+    /* CTA heading. Horizontal padding is supplied by .bottom-cta so the
+       vertical bar aligns with row bars at every viewport width. */
+    .cta-heading-wrap {
+      position: relative;
+      margin-bottom: 1rem;
+      padding: 6rem 0 0;
+    }
+
+    .cta-heading-wrap::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 12px;
+      background: var(--accent);
+    }
+
+    /* ---- PIXEL BEVEL AT SNAKE CORNERS ----
+       3×3 red squares sit in the exterior wedge of each concave L-bend,
+       with one corner of the square touching the concave point — a 1-pixel
+       chamfer that rounds the sharp 90° inside corner */
+    .heading-after--right::after,
+    .features-row--right::after,
+    .features-row--left::after,
+    .cta-heading-wrap::after,
+    .corner-bevel {
+      content: "";
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: var(--accent);
+    }
+
+    /* each bend also gets a dark 3×3 chip at its convex outer corner —
+       delivered via box-shadow offset so we don't need extra elements.
+       inner red bevel + outer dark notch = chamfered 1-pixel corner */
+
+    /* dark chip offset diagonally across the 12×12 bend-square from the
+       red inner bevel — lands on the convex outer corner of the bend */
+
+    /* heading → row 1 (right-down bend) */
+    .heading-after--right::after {
+      top: 0;
+      right: 12px;
+      box-shadow: 12px -12px 0 var(--background);
+    }
+
+    /* row bottom, right bar (down-left bend) */
+    .features-row--right::after {
+      bottom: 0;
+      right: 12px;
+      box-shadow: 12px 12px 0 var(--background);
+    }
+
+    /* row bottom, left bar (down-right bend) */
+    .features-row--left::after {
+      bottom: 0;
+      left: 12px;
+      box-shadow: -12px 12px 0 var(--background);
+    }
+
+    /* top-of-row bevels for rows entered via a connector */
+    .corner-bevel--top-left {
+      top: 0;
+      left: 12px;
+      box-shadow: -12px -12px 0 var(--background);
+    }
+
+    .corner-bevel--top-right {
+      top: 0;
+      right: 12px;
+      box-shadow: 12px -12px 0 var(--background);
+    }
+
+    /* vertical drop → start writing music (down-right bend) */
+    .cta-heading-wrap::after {
+      bottom: 12px;
+      left: 12px;
+      box-shadow: -12px 12px 0 var(--background);
+    }
+
+    /* row 4 has no bottom bend — it flows straight into the CTA vertical —
+       so suppress the bottom bevel on the last features-row */
+    .features-row--left:last-of-type::after {
+      content: none;
     }
 
     .features-row-header {
@@ -216,7 +430,7 @@
       font-weight: 700;
       letter-spacing: 3px;
       text-transform: uppercase;
-      color: #ff0000;
+      color: var(--accent);
       margin-bottom: 1.2rem;
       padding-left: 0.2rem;
     }
@@ -228,8 +442,8 @@
     }
 
     .feature-card {
-      background: #111;
-      border: none;
+      background: var(--background);
+      border: var(--line) solid var(--complement);
       border-radius: 12px;
       overflow: hidden;
     }
@@ -237,7 +451,7 @@
     .feature-gif {
       width: 100%;
       aspect-ratio: 4 / 3;
-      background: #161616;
+      background: var(--background);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -251,7 +465,7 @@
     }
 
     .feature-gif-placeholder {
-      color: #333;
+      color: var(--subtext);
       font-family: 'Space Mono', monospace;
       font-size: 0.75rem;
       letter-spacing: 2px;
@@ -269,7 +483,7 @@
       font-weight: 700;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: #ff0000;
+      color: var(--accent);
       margin-bottom: 0.5rem;
     }
 
@@ -277,18 +491,20 @@
       font-size: 1.05rem;
       font-weight: 600;
       margin-bottom: 0.4rem;
-      color: #ffffff;
+      color: var(--text);
     }
 
     .feature-desc {
       font-size: 0.85rem;
-      color: #bbb;
+      color: var(--subtext);
       line-height: 1.5;
     }
 
     /* ---- BOTTOM CTA ---- */
     .bottom-cta {
-      padding: 6rem 2rem 8rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem 8rem;
       text-align: center;
       position: relative;
     }
@@ -300,35 +516,35 @@
     .bottom-cta h2 {
       font-family: 'Space Mono', monospace;
       font-size: clamp(1.8rem, 4vw, 2.8rem);
-      margin-bottom: 1rem;
-      color: #ff0000;
+      margin-bottom: 0;
+      color: var(--accent);
     }
 
     .bottom-cta p {
-      color: #666;
+      color: var(--subtext);
       margin-bottom: 2.5rem;
       font-size: 1rem;
     }
 
     /* ---- FOOTER ---- */
     footer {
-      border-top: 1px solid #1a1a1a;
+      border-top: var(--line) solid var(--complement);
       padding: 2rem 3rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       font-size: 0.8rem;
-      color: #444;
+      color: var(--subtext);
     }
 
     footer a {
-      color: #666;
+      color: var(--subtext);
       text-decoration: none;
       transition: color 0.3s;
     }
 
     footer a:hover {
-      color: #ff0000;
+      color: var(--accent);
     }
 
     /* ---- RESPONSIVE ---- */
@@ -365,18 +581,22 @@
   <!-- NAV -->
   <nav>
     <div class="nav-logo">MeloWrite</div>
-    <ul class="nav-links">
-      <li><a href="#features">Features</a></li>
-      <li><a href="#buy">Buy</a></li>
-    </ul>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#buy">Buy</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">Light</button>
+    </div>
   </nav>
 
   <!-- HERO -->
   <section class="hero">
     <div class="logo-mark">
-      <img src="melowritelogo.png" alt="MeloWrite">
+      <img class="logo-dark" src="melowritelogodark.png" alt="MeloWrite">
+      <img class="logo-light" src="melowritelogolight.png" alt="MeloWrite">
     </div>
-    <p class="tagline">The best way to make music on your computer</p>
+    <p class="tagline">A minimalist DAW for MIDI, soundfonts and samples. </p>
     <a href="#buy" class="btn-buy">Buy Now</a>
   </section>
 
@@ -394,12 +614,18 @@
   <!-- FEATURES -->
   <section class="features-section" id="features">
     <div class="features-heading">
-      <h2>Built different.</h2>
-      <p>A program that gets out of your way.</p>
+      <div class="heading-line">
+        <div class="heading-side"></div>
+        <h2>Built different.</h2>
+        <div class="heading-side heading-side--bar-right"></div>
+      </div>
+      <div class="heading-after heading-after--right">
+        <p>A program that gets out of your way.</p>
+      </div>
     </div>
 
     <!-- ROW 1: COMPOSE -->
-    <div class="features-row">
+    <div class="features-row features-row--right">
       <div class="features-row-header">Compose</div>
       <div class="features-grid">
         <div class="feature-card">
@@ -426,8 +652,11 @@
       </div>
     </div>
 
+    <div class="snake-connector"></div>
+
     <!-- ROW 2: SOUND -->
-    <div class="features-row">
+    <div class="features-row features-row--left">
+      <span class="corner-bevel corner-bevel--top-left"></span>
       <div class="features-row-header">Sound</div>
       <div class="features-grid">
         <div class="feature-card">
@@ -454,8 +683,11 @@
       </div>
     </div>
 
+    <div class="snake-connector"></div>
+
     <!-- ROW 3: WORKFLOW -->
-    <div class="features-row">
+    <div class="features-row features-row--right">
+      <span class="corner-bevel corner-bevel--top-right"></span>
       <div class="features-row-header">Workflow</div>
       <div class="features-grid">
         <div class="feature-card">
@@ -482,8 +714,11 @@
       </div>
     </div>
 
+    <div class="snake-connector"></div>
+
     <!-- ROW 4: POWER -->
-    <div class="features-row">
+    <div class="features-row features-row--left">
+      <span class="corner-bevel corner-bevel--top-left"></span>
       <div class="features-row-header">Power</div>
       <div class="features-grid">
         <div class="feature-card">
@@ -503,8 +738,8 @@
         <div class="feature-card">
           <div class="feature-gif"><span class="feature-gif-placeholder">[ gif ]</span></div>
           <div class="feature-info">
-            <div class="feature-title">Fully Remappable</div>
-            <p class="feature-desc">Every shortcut is yours to change. Make MeloWrite work the way you think.</p>
+            <div class="feature-title">Physical Keyboard</div>
+            <p class="feature-desc">Physical piano keys. Play and record directly from your computer keyboard, no MIDI controller required.</p>
           </div>
         </div>
       </div>
@@ -513,7 +748,13 @@
 
   <!-- BOTTOM CTA -->
   <section class="bottom-cta" id="buy">
-    <h2>Start writing music.</h2>
+    <div class="cta-heading-wrap">
+      <div class="heading-line">
+        <div class="heading-side heading-side--bar-left"></div>
+        <h2>Start writing music.</h2>
+        <div class="heading-side"></div>
+      </div>
+    </div>
     <p>No subscriptions. No bloat. Just a tool that works.</p>
     <a href="#" class="btn-buy">Buy Now</a>
   </section>
@@ -523,6 +764,30 @@
     <span>&copy; 2026 MeloWrite</span>
     <span><a href="#">Twitter</a> &middot; <a href="#">Discord</a> &middot; <a href="#">GitHub</a></span>
   </footer>
+
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const btn = document.getElementById('themeToggle');
+      const saved = localStorage.getItem('theme');
+      if (saved === 'light') {
+        root.setAttribute('data-theme', 'light');
+        btn.textContent = 'Dark';
+      }
+      btn.addEventListener('click', () => {
+        const isLight = root.getAttribute('data-theme') === 'light';
+        if (isLight) {
+          root.removeAttribute('data-theme');
+          btn.textContent = 'Light';
+          localStorage.setItem('theme', 'dark');
+        } else {
+          root.setAttribute('data-theme', 'light');
+          btn.textContent = 'Dark';
+          localStorage.setItem('theme', 'light');
+        }
+      });
+    })();
+  </script>
 
 </body>
 </html>
