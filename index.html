@@ -13,20 +13,12 @@
     }
 
     :root {
-      --background: #000000;
-      --accent: #e11d55;
-      --complement: #9652c8;
-      --text: #f7f7f7;
-      --subtext: #c4c4c4;
-      --line: 2px;
-    }
-
-    [data-theme="light"] {
-      --background: #ffffff;
-      --accent: #9652c8;
-      --complement: #e11d55;
+      --background: #e0ece8;
+      --accent: #5b7193;
+      --complement: #6b517e;
       --text: #000000;
       --subtext: #525252;
+      --line: 2px;
     }
 
     body {
@@ -48,34 +40,6 @@
       align-items: center;
       background: var(--background);
       border-bottom: var(--line) solid var(--complement);
-    }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-    }
-
-    .theme-toggle {
-      background: transparent;
-      border: var(--line) solid var(--accent);
-      color: var(--text);
-      font-family: 'Space Mono', monospace;
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      padding: 0.5rem 0.9rem;
-      cursor: pointer;
-      border-radius: 4px;
-      transition: background 0.2s, color 0.2s;
-      width: 5.5rem;
-      text-align: center;
-    }
-
-    .theme-toggle:hover {
-      background: var(--accent);
-      color: var(--background);
     }
 
     .nav-logo {
@@ -132,10 +96,6 @@
       image-rendering: -moz-crisp-edges;
       image-rendering: crisp-edges;
     }
-
-    .logo-mark .logo-light { display: none; }
-    [data-theme="light"] .logo-mark .logo-dark { display: none; }
-    [data-theme="light"] .logo-mark .logo-light { display: inline; }
 
 .tagline {
       font-size: clamp(1rem, 2vw, 1.3rem);
@@ -443,7 +403,7 @@
 
     .feature-card {
       background: var(--background);
-      border: var(--line) solid var(--complement);
+      border: none;
       border-radius: 12px;
       overflow: hidden;
     }
@@ -581,19 +541,15 @@
   <!-- NAV -->
   <nav>
     <div class="nav-logo">MeloWrite</div>
-    <div class="nav-right">
-      <ul class="nav-links">
-        <li><a href="#features">Features</a></li>
-        <li><a href="#buy">Buy</a></li>
-      </ul>
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">Light</button>
-    </div>
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#buy">Buy</a></li>
+    </ul>
   </nav>
 
   <!-- HERO -->
   <section class="hero">
     <div class="logo-mark">
-      <img class="logo-dark" src="melowritelogodark.png" alt="MeloWrite">
       <img class="logo-light" src="melowritelogolight.png" alt="MeloWrite">
     </div>
     <p class="tagline">A minimalist DAW for MIDI, soundfonts and samples. </p>
@@ -632,14 +588,14 @@
           <div class="feature-gif"><span class="feature-gif-placeholder">[ gif ]</span></div>
           <div class="feature-info">
             <div class="feature-title">Procedural Chords</div>
-            <p class="feature-desc"> Create chord progressions and melodies with the push of button, be a player or a tastemaker</p>
+            <p class="feature-desc"> Create chord progressions and melodies with the push of button, be a player or a tastemaker.</p>
           </div>
         </div>
         <div class="feature-card">
           <div class="feature-gif"><span class="feature-gif-placeholder">[ gif ]</span></div>
           <div class="feature-info">
             <div class="feature-title">Scale Locking</div>
-            <p class="feature-desc">Detect and swap scales. Go from triumphant to moody or mysterious with a click, and with scale locking, every note you play is always in key.</p>
+            <p class="feature-desc">Never play a wrong note, detect scales and swap moods with one click.</p>
           </div>
         </div>
         <div class="feature-card">
@@ -663,7 +619,7 @@
           <div class="feature-gif"><span class="feature-gif-placeholder">[ gif ]</span></div>
           <div class="feature-info">
             <div class="feature-title">Built-in Instruments</div>
-            <p class="feature-desc">A full synthesizer, a dedicated NES synth, and 500 beautiful built-in samples and drum kits. All free to use in your projects, right out of the box..</p>
+            <p class="feature-desc">A full synthesizer, a dedicated NES synth, and 500 beautiful built-in samples and drum kits. All free to use in your projects, right out of the box.</p>
           </div>
         </div>
         <div class="feature-card">
@@ -764,30 +720,6 @@
     <span>&copy; 2026 MeloWrite</span>
     <span><a href="#">Twitter</a> &middot; <a href="#">Discord</a> &middot; <a href="#">GitHub</a></span>
   </footer>
-
-  <script>
-    (function () {
-      const root = document.documentElement;
-      const btn = document.getElementById('themeToggle');
-      const saved = localStorage.getItem('theme');
-      if (saved === 'light') {
-        root.setAttribute('data-theme', 'light');
-        btn.textContent = 'Dark';
-      }
-      btn.addEventListener('click', () => {
-        const isLight = root.getAttribute('data-theme') === 'light';
-        if (isLight) {
-          root.removeAttribute('data-theme');
-          btn.textContent = 'Light';
-          localStorage.setItem('theme', 'dark');
-        } else {
-          root.setAttribute('data-theme', 'light');
-          btn.textContent = 'Dark';
-          localStorage.setItem('theme', 'light');
-        }
-      });
-    })();
-  </script>
 
 </body>
 </html>
