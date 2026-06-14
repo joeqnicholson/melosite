@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentation - Melowrite</title>
+  <link rel="icon" href="images/icon.ico" type="image/x-icon">
+  <link rel="preload" as="image" href="images/logohover.png">
+  <link rel="preload" as="image" href="images/logoclick.png">
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Google Analytics (GA4) — Measurement ID for www.melowrite.org -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LC7XG6517F"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LC7XG6517F');
+  </script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --background: #ffffff;
+      --accent: #5b7193;
+      --complement: #6e5b93;
+      --line-color: #b2bec3;
+      --text: #000000;
+      --subtext: #525252;
+      --line: 2px;
+      --radius: 6px;
+      --radius-lg: 12px;
+    }
+
+    body {
+      background: var(--background);
+      color: var(--text);
+      font-family: 'IBM Plex Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ---- NAV ---- */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 0.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--line-color);
+      border-bottom: var(--line) solid var(--line-color);
+    }
+
+    .nav-logo {
+      display: block;
+      width: 56px;
+      height: 56px;
+      background: url(images/logo.png) no-repeat center / contain;
+      image-rendering: pixelated;
+      text-indent: -9999px;
+      overflow: hidden;
+    }
+
+    .nav-logo:hover {
+      background-image: url(images/logohover.png);
+    }
+
+    .nav-logo:active {
+      background-image: url(images/logoclick.png);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Google Sans', sans-serif;
+      font-weight: 700;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #ffffff;
+    }
+
+    .nav-links a.nav-buy {
+      background: var(--complement);
+      color: #ffffff;
+      border: none;
+      border-radius: var(--radius);
+      padding: 0.4rem 0.9rem;
+    }
+
+    .nav-links a.nav-trial {
+      border: 2px solid #ffffff;
+      border-radius: var(--radius);
+      padding: 0.4rem 0.9rem;
+    }
+
+    /* ---- DOCS ---- */
+    .docs {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 7rem 2rem 4rem;
+      display: flex;
+      gap: 3rem;
+      min-height: 100vh;
+      align-items: flex-start;
+    }
+
+    .docs-sidebar {
+      width: 200px;
+      flex-shrink: 0;
+      position: sticky;
+      top: 7rem;
+      list-style: none;
+      border-right: var(--line) solid var(--line-color);
+    }
+
+    .docs-sidebar a {
+      display: block;
+      padding: 0.5rem 1rem;
+      font-family: 'Google Sans', sans-serif;
+      font-size: 0.9rem;
+      color: var(--subtext);
+      text-decoration: none;
+      border-left: var(--line) solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .docs-sidebar a:hover {
+      color: var(--text);
+    }
+
+    .docs-sidebar a.active {
+      color: var(--complement);
+      font-weight: 700;
+      border-left-color: var(--complement);
+    }
+
+    .docs-content {
+      flex: 1;
+      max-width: 720px;
+    }
+
+    .docs-content h1 {
+      font-family: 'Google Sans', sans-serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+    }
+
+    .docs-content p {
+      color: var(--subtext);
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 560px;
+    }
+
+    .docs-content a {
+      color: var(--complement);
+      text-decoration: underline;
+      word-break: break-all;
+    }
+
+    .docs-subtitle {
+      color: var(--subtext);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .docs-content h2 {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 1rem;
+      color: var(--complement);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 2rem 0 0.6rem;
+    }
+
+    .shortcut-table {
+      border-collapse: collapse;
+      margin-bottom: 0.5rem;
+    }
+
+    .shortcut-table td {
+      padding: 0.4rem 0.5rem;
+      border-bottom: 1px solid var(--line-color);
+      font-size: 0.92rem;
+      vertical-align: top;
+      white-space: nowrap;
+    }
+
+    .shortcut-table td:first-child {
+      color: var(--subtext);
+      padding-right: 2.5rem;
+    }
+
+    kbd {
+      display: inline-block;
+      font-family: ui-monospace, Consolas, 'Courier New', monospace;
+      font-size: 0.8rem;
+      color: var(--text);
+      background: #f2f2f4;
+      border: 1px solid var(--line-color);
+      border-radius: 4px;
+      padding: 1px 6px;
+      white-space: nowrap;
+    }
+
+    .sc-unbound {
+      color: var(--line-color);
+      font-style: italic;
+    }
+
+    .docs-placeholder {
+      color: var(--line-color);
+      font-style: italic;
+    }
+
+    .docs-section {
+      display: none;
+    }
+
+    .docs-section.active {
+      display: block;
+    }
+
+    /* ---- FOOTER ---- */
+    footer {
+      background: #677e9c;
+      border-top: var(--line) solid #677e9c;
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: #ffffff;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 0.5rem 1.2rem;
+      }
+
+      .nav-logo {
+        width: 44px;
+        height: 44px;
+      }
+
+      .nav-links {
+        gap: 0.8rem;
+      }
+
+      .nav-links a {
+        font-size: 0.75rem;
+        letter-spacing: 0.5px;
+      }
+
+      .nav-links a.nav-buy,
+      .nav-links a.nav-trial {
+        padding: 0.35rem 0.7rem;
+      }
+
+      .docs {
+        flex-direction: column;
+        gap: 1.5rem;
+        padding-top: 6rem;
+      }
+
+      .docs-sidebar {
+        position: static;
+        width: 100%;
+        border-right: none;
+        border-bottom: var(--line) solid var(--line-color);
+        display: flex;
+        flex-wrap: wrap;
+        padding-bottom: 0.5rem;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 0.8rem;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/" class="nav-logo">Melowrite</a>
+    <ul class="nav-links">
+      <li><a href="/#features">Features</a></li>
+      <li><a href="docs" class="nav-trial">Docs</a></li>
+      <li><a href="buy" class="nav-buy">Buy</a></li>
+    </ul>
+  </nav>
+
+  <!-- DOCS -->
+  <main class="docs">
+    <ul class="docs-sidebar">
+      <li><a href="#overview" data-target="overview" class="active">Overview</a></li>
+      <li><a href="#shortcuts" data-target="shortcuts">Shortcuts</a></li>
+      <li><a href="#unity" data-target="unity">Unity Integration</a></li>
+    </ul>
+
+    <div class="docs-content">
+      <section class="docs-section active" id="overview">
+        <h1>Overview</h1>
+        <p>This is the placeholder documentation for Melowrite, a minimalist DAW made specifically for game development, currently in early access.</p>
+      </section>
+
+      <section class="docs-section" id="shortcuts">
+        <h1>Shortcuts</h1>
+        <p class="docs-subtitle">Defaults (all rebindable in Preferences &gt; Shortcuts).</p>
+
+        <h2>File</h2>
+        <table class="shortcut-table">
+          <tr><td>New Project</td><td><kbd>Ctrl+N</kbd></td></tr>
+          <tr><td>Open Project</td><td><kbd>Ctrl+O</kbd></td></tr>
+          <tr><td>Save</td><td><kbd>Ctrl+S</kbd></td></tr>
+          <tr><td>Save As</td><td><kbd>Ctrl+Shift+S</kbd></td></tr>
+          <tr><td>Export</td><td><kbd>Ctrl+E</kbd></td></tr>
+          <tr><td>Export Game</td><td><kbd>Ctrl+Shift+E</kbd></td></tr>
+        </table>
+
+        <h2>Edit</h2>
+        <table class="shortcut-table">
+          <tr><td>Undo</td><td><kbd>Ctrl+Z</kbd></td></tr>
+          <tr><td>Redo</td><td><kbd>Ctrl+Shift+Z</kbd> or <kbd>Ctrl+Y</kbd></td></tr>
+          <tr><td>Select All</td><td><kbd>Ctrl+A</kbd></td></tr>
+          <tr><td>Copy</td><td><kbd>Ctrl+C</kbd></td></tr>
+          <tr><td>Cut</td><td><kbd>Ctrl+X</kbd></td></tr>
+          <tr><td>Paste</td><td><kbd>Ctrl+V</kbd></td></tr>
+          <tr><td>Duplicate</td><td><kbd>Ctrl+D</kbd></td></tr>
+          <tr><td>Delete</td><td><kbd>Delete</kbd> or <kbd>Backspace</kbd> or <kbd>Shift+X</kbd></td></tr>
+        </table>
+
+        <h2>Transport</h2>
+        <table class="shortcut-table">
+          <tr><td>Play / Pause</td><td><kbd>Space</kbd></td></tr>
+          <tr><td>Record</td><td><kbd>Ctrl+R</kbd> or <kbd>Ctrl+Space</kbd></td></tr>
+          <tr><td>Rewind</td><td><kbd>Enter</kbd></td></tr>
+          <tr><td>Rewind + Play</td><td><kbd>Shift+Space</kbd></td></tr>
+          <tr><td>Toggle Metronome</td><td><kbd>M</kbd></td></tr>
+          <tr><td>Toggle Loop</td><td><kbd>R</kbd></td></tr>
+          <tr><td>Octave Down / Up</td><td><kbd>Z</kbd> / <kbd>X</kbd></td></tr>
+          <tr><td>Velocity Down / Up</td><td><kbd>C</kbd> / <kbd>V</kbd></td></tr>
+          <tr><td>Toggle Keyboard Window</td><td><kbd>Shift+K</kbd></td></tr>
+        </table>
+
+        <h2>Editor (Pattern / Arranger)</h2>
+        <table class="shortcut-table">
+          <tr><td>Grab / Move</td><td><kbd>Shift+G</kbd></td></tr>
+          <tr><td>Toggle Draw / Select</td><td><kbd>B</kbd></td></tr>
+          <tr><td>Cancel / Deselect</td><td><kbd>Esc</kbd></td></tr>
+          <tr><td>Confirm</td><td><kbd>Enter</kbd> or <kbd>Keypad Enter</kbd></td></tr>
+          <tr><td>Rename</td><td><kbd>F2</kbd></td></tr>
+          <tr><td>Quantize</td><td><kbd>Ctrl+Q</kbd></td></tr>
+          <tr><td>Legato</td><td><kbd>Ctrl+L</kbd></td></tr>
+          <tr><td>Set Note Length, then 1–4</td><td><kbd>Ctrl+W</kbd></td></tr>
+          <tr><td>Quantify Entries</td><td><kbd>Q</kbd></td></tr>
+          <tr><td>Frame All</td><td><kbd>Shift+F</kbd></td></tr>
+          <tr><td>Pattern Octave Down / Up</td><td><kbd>Ctrl+Y</kbd> / <kbd>Ctrl+U</kbd></td></tr>
+          <tr><td>Extend Pattern</td><td><span class="sc-unbound">unbound by default</span></td></tr>
+        </table>
+
+        <h2>Navigation</h2>
+        <table class="shortcut-table">
+          <tr><td>Toggle Pattern / Properties</td><td><kbd>Tab</kbd></td></tr>
+          <tr><td>Toggle Chunk / Arranger</td><td><kbd>Shift+Tab</kbd></td></tr>
+          <tr><td>Shortcuts Help</td><td><kbd>F1</kbd></td></tr>
+          <tr><td>Fullscreen</td><td><kbd>F11</kbd></td></tr>
+          <tr><td>Performance Overlay</td><td><kbd>F12</kbd></td></tr>
+        </table>
+
+        <h2>Chunks</h2>
+        <table class="shortcut-table">
+          <tr><td>Create Chunk</td><td><kbd>Alt+N</kbd></td></tr>
+        </table>
+
+        <h2>Mixer</h2>
+        <table class="shortcut-table">
+          <tr><td>Solo selected track</td><td><kbd>Alt+S</kbd></td></tr>
+          <tr><td>Mute all tracks</td><td><kbd>Alt+M</kbd></td></tr>
+        </table>
+
+        <h2>Piano Keyboard (musical typing)</h2>
+        <table class="shortcut-table">
+          <tr><td>White keys</td><td><kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> <kbd>F</kbd> <kbd>G</kbd> <kbd>H</kbd> <kbd>J</kbd> <kbd>K</kbd> <kbd>L</kbd></td></tr>
+          <tr><td>Black keys</td><td><kbd>W</kbd> <kbd>E</kbd> <kbd>T</kbd> <kbd>Y</kbd> <kbd>U</kbd></td></tr>
+          <tr><td>Octave down / up</td><td><kbd>Z</kbd> / <kbd>X</kbd></td></tr>
+          <tr><td>Velocity down / up</td><td><kbd>C</kbd> / <kbd>V</kbd></td></tr>
+          <tr><td>Open Musical Typing window</td><td><kbd>Shift+K</kbd></td></tr>
+        </table>
+      </section>
+
+      <section class="docs-section" id="unity">
+        <h1>Unity Integration</h1>
+        <p>Download link: <a href="https://github.com/joeqnicholson/melowrite-unity" target="_blank" rel="noopener">https://github.com/joeqnicholson/melowrite-unity</a></p>
+      </section>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>&copy; 2026 Melowrite</span>
+  </footer>
+
+  <script>
+    (function () {
+      var links = document.querySelectorAll('.docs-sidebar a');
+      var sections = document.querySelectorAll('.docs-section');
+
+      function show(target) {
+        sections.forEach(function (s) {
+          s.classList.toggle('active', s.id === target);
+        });
+        links.forEach(function (l) {
+          l.classList.toggle('active', l.getAttribute('data-target') === target);
+        });
+      }
+
+      links.forEach(function (l) {
+        l.addEventListener('click', function (e) {
+          e.preventDefault();
+          var target = l.getAttribute('data-target');
+          show(target);
+          history.replaceState(null, '', '#' + target);
+        });
+      });
+
+      // Honor a #section in the URL on load, otherwise keep Overview.
+      var hash = window.location.hash.replace('#', '');
+      if (hash && document.getElementById(hash)) show(hash);
+    })();
+  </script>
+
+</body>
+</html>

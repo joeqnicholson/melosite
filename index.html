@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Melowrite: A Minimal DAW for Video Game Music &amp; Audio</title>
+  <meta name="description" content="Melowrite is a focused MIDI DAW for composing video game music and audio — generate chords, lock to scales, and score your game without the bloat.">
+  <link rel="canonical" href="https://www.melowrite.org/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Melowrite">
+  <meta property="og:title" content="Melowrite: A Minimal DAW for Video Game Music & Audio">
+  <meta property="og:description" content="A focused MIDI DAW for composing video game music and audio. Generate chords, lock to scales, and score your game.">
+  <meta property="og:url" content="https://www.melowrite.org/">
+  <meta property="og:image" content="https://www.melowrite.org/images/melowritelogolight.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Melowrite: A Minimal DAW for Video Game Music & Audio">
+  <meta name="twitter:description" content="A focused MIDI DAW for composing video game music and audio.">
+  <meta name="twitter:image" content="https://www.melowrite.org/images/melowritelogolight.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Melowrite",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Windows",
+    "url": "https://www.melowrite.org/",
+    "description": "A minimal MIDI DAW for composing video game music and audio."
+  }
+  </script>
+  <link rel="icon" href="images/icon.ico" type="image/x-icon">
+  <link rel="preload" as="image" href="images/logohover.png">
+  <link rel="preload" as="image" href="images/logoclick.png">
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Google Analytics (GA4) — Measurement ID for www.melowrite.org -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LC7XG6517F"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LC7XG6517F');
+  </script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* always reserve the vertical scrollbar so the viewport width can't jump
+       (and re-trigger layout) as content height crosses the window height */
+    html {
+      overflow-y: scroll;
+    }
+
+    :root {
+      --background: #ffffff;
+      --accent: #5b7193;
+      --complement: #6e5b93;
+      --line-color: #b2bec3;
+      --text: #000000;
+      --subtext: #525252;
+      --line: 2px;
+      --radius: 6px;
+      --radius-lg: 12px;
+    }
+
+    body {
+      background: var(--background);
+      color: var(--text);
+      font-family: 'IBM Plex Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ---- NAV ---- */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 0.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--line-color);
+      border-bottom: var(--line) solid var(--line-color);
+    }
+
+    .nav-logo {
+      display: block;
+      width: 56px;
+      height: 56px;
+      background: url(images/logo.png) no-repeat center / contain;
+      image-rendering: pixelated;
+      text-indent: -9999px;
+      overflow: hidden;
+    }
+
+    .nav-logo:hover {
+      background-image: url(images/logohover.png);
+    }
+
+    .nav-logo:active {
+      background-image: url(images/logoclick.png);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Google Sans', sans-serif;
+      font-weight: 700;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #ffffff;
+    }
+
+    .nav-links a.nav-buy {
+      background: var(--complement);
+      color: #ffffff;
+      border: none;
+      border-radius: var(--radius);
+      padding: 0.4rem 0.9rem;
+    }
+
+    .nav-links a.nav-trial {
+      border: 2px solid #ffffff;
+      border-radius: var(--radius);
+      padding: 0.4rem 0.9rem;
+    }
+
+    /* ---- HERO ---- */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+    }
+
+    .hero::before {
+      display: none;
+    }
+
+    .logo-mark {
+      margin-bottom: 2rem;
+    }
+
+    .logo-mark img {
+      display: block;
+      width: min(620px, calc(100vw - 4rem));
+      height: auto;
+      image-rendering: pixelated;
+      image-rendering: -moz-crisp-edges;
+      image-rendering: crisp-edges;
+    }
+
+.tagline {
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      color: var(--subtext);
+      max-width: 500px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.6;
+    }
+
+    .tagline span {
+      color: var(--accent);
+    }
+
+    /* ---- BUTTONS ---- */
+    .btn-buy {
+      display: inline-block;
+      padding: 1rem 3rem;
+      font-family: 'Google Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #ffffff;
+      background: var(--complement);
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .btn-buy:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-buy:active {
+      transform: translateY(0);
+    }
+
+    .btn-trial {
+      display: inline-block;
+      padding: 1rem 3rem;
+      font-family: 'Google Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--complement);
+      background: transparent;
+      border: 2px solid var(--complement);
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .btn-trial:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-trial:active {
+      transform: translateY(0);
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ---- VIDEO ---- */
+    .video-section {
+      padding: 4rem 2rem 6rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .video-wrapper {
+      width: 100%;
+      max-width: 900px;
+      aspect-ratio: 2300 / 1294;
+      background: var(--background) center / cover no-repeat;
+      border-radius: var(--radius-lg);
+      border: var(--line) solid var(--line-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .video-wrapper::before {
+      display: none;
+    }
+
+    .play-btn {
+      width: 72px;
+      height: 72px;
+      border-radius: var(--radius);
+      border: calc(var(--line) * 2) solid var(--complement);
+      background: var(--complement);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      z-index: 1;
+    }
+
+    .play-btn:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: scale(1.08);
+    }
+
+    .play-btn svg {
+      width: 28px;
+      height: 28px;
+      margin-left: 4px;
+    }
+
+    /* ---- FEATURES GRID ---- */
+    .features-section {
+      padding: 4rem 2rem 0;
+      max-width: 1100px;
+      margin: 0 auto;
+      scroll-margin-top: 20px;
+    }
+
+    .features-heading {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .features-heading h2 {
+      font-family: 'Google Sans', sans-serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      margin-bottom: 0.8rem;
+      color: var(--line-color);
+    }
+
+    .features-heading p {
+      color: var(--subtext);
+      font-size: 1rem;
+    }
+
+    .features-row {
+      margin-bottom: 0;
+    }
+
+    .features-row:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ---- SNAKE PATH ---- */
+    /* heading underline -> corner extension -> vertical drop -> row side bar
+       -> full-width connector -> mirror -> final underline at bottom cta */
+
+    .features-heading {
+      margin-bottom: 0;
+    }
+
+    .heading-line {
+      display: flex;
+      align-items: flex-end;
+      margin-bottom: 0;
+    }
+
+    /* 12px-tall bars sit flush to the bottom of the flex row, on the same
+       baseline as the h2's border-bottom — no sub-pixel drift */
+    .heading-side {
+      flex: 1;
+      height: 5px;
+      min-width: 0;
+    }
+
+    .heading-side--bar-right,
+    .heading-side--bar-left {
+      background: var(--line-color);
+    }
+
+    .features-heading h2,
+    .bottom-cta h2 {
+      display: inline-block;
+      padding-bottom: 0.8rem;
+      margin-bottom: 0;
+      border-bottom: 5px solid var(--line-color);
+    }
+
+    .snake-connector {
+      height: 5px;
+      background: var(--line-color);
+      width: 100%;
+      margin: 0;
+    }
+
+    /* .heading-after sits directly below the heading-line inside .features-heading,
+       so its top is exactly at the h2 underline y. The vertical bar pseudo-element
+       spans from that y down to row 1's top, closing the gap. */
+    .heading-after {
+      position: relative;
+      padding: 1.2rem 0 2rem;
+    }
+
+    .heading-after--right::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      width: 5px;
+      background: var(--line-color);
+    }
+
+    .features-row {
+      position: relative;
+      padding: 2rem 2.2rem;
+    }
+
+    .features-row--right::before,
+    .features-row--left::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 5px;
+      background: var(--line-color);
+    }
+
+    .features-row--right::before { right: 0; }
+    .features-row--left::before  { left: 0; }
+
+    /* CTA heading. Horizontal padding is supplied by .bottom-cta so the
+       vertical bar aligns with row bars at every viewport width. */
+    .cta-heading-wrap {
+      position: relative;
+      margin-bottom: 1rem;
+      padding: 6rem 0 0;
+    }
+
+    .cta-heading-wrap::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 5px;
+      background: var(--line-color);
+    }
+
+    /* ---- PIXEL BEVEL AT SNAKE CORNERS ----
+       3×3 red squares sit in the exterior wedge of each concave L-bend,
+       with one corner of the square touching the concave point — a 1-pixel
+       chamfer that rounds the sharp 90° inside corner */
+    /* bevelled corners removed */
+    .corner-bevel {
+      display: none;
+    }
+
+    /* each bend also gets a dark 3×3 chip at its convex outer corner —
+       delivered via box-shadow offset so we don't need extra elements.
+       inner red bevel + outer dark notch = chamfered 1-pixel corner */
+
+    /* dark chip offset diagonally across the 12×12 bend-square from the
+       red inner bevel — lands on the convex outer corner of the bend */
+
+    /* heading → row 1 (right-down bend) */
+    .heading-after--right::after {
+      top: 0;
+      right: 12px;
+      box-shadow: 12px -12px 0 var(--background);
+    }
+
+    /* row bottom, right bar (down-left bend) */
+    .features-row--right::after {
+      bottom: 0;
+      right: 12px;
+      box-shadow: 12px 12px 0 var(--background);
+    }
+
+    /* row bottom, left bar (down-right bend) */
+    .features-row--left::after {
+      bottom: 0;
+      left: 12px;
+      box-shadow: -12px 12px 0 var(--background);
+    }
+
+    /* top-of-row bevels for rows entered via a connector */
+    .corner-bevel--top-left {
+      top: 0;
+      left: 12px;
+      box-shadow: -12px -12px 0 var(--background);
+    }
+
+    .corner-bevel--top-right {
+      top: 0;
+      right: 12px;
+      box-shadow: 12px -12px 0 var(--background);
+    }
+
+    /* vertical drop → start writing music (down-right bend) */
+    .cta-heading-wrap::after {
+      bottom: 12px;
+      left: 12px;
+      box-shadow: -12px 12px 0 var(--background);
+    }
+
+    /* row 4 has no bottom bend — it flows straight into the CTA vertical —
+       so suppress the bottom bevel on the last features-row */
+    .features-row--left:last-of-type::after {
+      content: none;
+    }
+
+    .features-row-header {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+      padding-left: 0.2rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .feature-card {
+      background: var(--background);
+      border: none;
+      border-radius: 0;
+      overflow: hidden;
+    }
+
+    .feature-gif {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      background: var(--background);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    }
+
+    .feature-gif::before {
+      display: none;
+    }
+
+    .feature-gif img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .feature-gif-placeholder {
+      color: var(--subtext);
+      font-family: 'Google Sans', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      z-index: 1;
+    }
+
+    .feature-info {
+      padding: 1.2rem 1.4rem 1.4rem;
+    }
+
+    .feature-label {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      color: var(--text);
+    }
+
+    .feature-desc {
+      font-size: 0.85rem;
+      color: var(--subtext);
+      line-height: 1.5;
+    }
+
+    /* ---- BOTTOM CTA ---- */
+    .bottom-cta {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem 8rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .bottom-cta::before {
+      display: none;
+    }
+
+    .bottom-cta h2 {
+      font-family: 'Google Sans', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      margin-bottom: 0;
+      color: var(--line-color);
+    }
+
+    .bottom-cta p {
+      color: var(--subtext);
+      margin-bottom: 2.5rem;
+      font-size: 1rem;
+    }
+
+    /* ---- FOOTER ---- */
+    footer {
+      background: #677e9c;
+      border-top: var(--line) solid #677e9c;
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: #ffffff;
+    }
+
+    footer a {
+      color: var(--subtext);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    footer a:hover {
+      color: var(--accent);
+    }
+
+    /* ---- RESPONSIVE ---- */
+
+    /* The snake path is hand-tuned to the full 3-column desktop grid. At any
+       narrower width (tablet 2-col, phone 1-col) its absolutely-positioned
+       bars no longer line up, so it visibly breaks and reflows while resizing.
+       Hide it entirely below the 3-col layout and center the headings that the
+       snake bars used to flank. */
+    @media (max-width: 1024px) {
+      .heading-side,
+      .snake-connector,
+      .heading-after--right::before,
+      .features-row--right::before,
+      .features-row--left::before,
+      .cta-heading-wrap::before {
+        display: none;
+      }
+
+      .heading-line {
+        justify-content: center;
+      }
+
+      .features-row {
+        padding: 2rem 0;
+      }
+
+      .heading-after {
+        padding: 1rem 0 1.5rem;
+      }
+
+      .cta-heading-wrap {
+        padding-top: 3rem;
+      }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .features-grid {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+      }
+
+      nav {
+        padding: 0.5rem 1.2rem;
+      }
+
+      .nav-links {
+        gap: 0.8rem;
+      }
+
+      .nav-logo {
+        width: 44px;
+        height: 44px;
+      }
+
+      .nav-links a {
+        font-size: 0.75rem;
+        letter-spacing: 0.5px;
+      }
+
+      .nav-links a.nav-buy,
+      .nav-links a.nav-trial {
+        padding: 0.35rem 0.7rem;
+      }
+
+      .features-section {
+        padding: 3rem 1.2rem 0;
+      }
+
+      .bottom-cta {
+        padding: 0 1.2rem 5rem;
+      }
+
+      .video-section {
+        padding: 3rem 1.2rem 4rem;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 0.8rem;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/" class="nav-logo">Melowrite</a>
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="docs" class="nav-trial">Docs</a></li>
+      <li><a href="buy" class="nav-buy">Buy</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="logo-mark">
+      <img class="logo-light" src="images/melowritelogolight.png" alt="Melowrite">
+    </div>
+    <p class="tagline">Your all-in-one solution for video game music and fx.</p>
+    <div class="cta-buttons">
+      <a href="buy" class="btn-buy">Buy Now</a>
+      <a href="trial" class="btn-trial">Free Trial</a>
+    </div>
+  </section>
+
+  <!-- VIDEO -->
+  <section class="video-section">
+    <div class="video-wrapper" id="trailer" data-yt="HNwweklKwHQ"
+         role="button" tabindex="0" aria-label="Play the Melowrite trailer">
+      <div class="play-btn">
+        <svg viewBox="0 0 24 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="6,3 20,12 6,21"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features-section" id="features">
+    <div class="features-heading">
+      <div class="heading-line">
+        <div class="heading-side"></div>
+        <h2>Features.</h2>
+        <div class="heading-side heading-side--bar-right"></div>
+      </div>
+      <div class="heading-after heading-after--right">
+        <p>A program that gets out of your way.</p>
+      </div>
+    </div>
+
+    <!-- ROW 1: COMPOSE -->
+    <div class="features-row features-row--right">
+      <div class="features-row-header">Compose</div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-gif"><img src="gifs/chords.gif" alt="Procedural Chords"></div>
+          <div class="feature-info">
+            <div class="feature-title">Procedural Chords</div>
+            <p class="feature-desc"> Create chord progressions and melodies with the push of button, be a player or a tastemaker.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-gif"><img src="gifs/scalelock.gif" alt="Scale Locking"></div>
+          <div class="feature-info">
+            <div class="feature-title">Scale Locking</div>
+            <p class="feature-desc">Never play a wrong note, detect scales and swap moods with one click.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-gif"><img src="gifs/drawplay.gif" alt="MIDI Draw &amp; Recording"></div>
+          <div class="feature-info">
+            <div class="feature-title">MIDI Draw &amp; Recording</div>
+            <p class="feature-desc">Draw notes directly, overdub layers or capture multi MIDI takes and choose your favorite.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="snake-connector"></div>
+
+    <!-- ROW 2: SOUND -->
+    <div class="features-row features-row--left">
+      <span class="corner-bevel corner-bevel--top-left"></span>
+      <div class="features-row-header">Sound</div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-gif"><img src="gifs/presets.gif" alt="Built-in Instruments"></div>
+          <div class="feature-info">
+            <div class="feature-title">Built-in Instruments</div>
+            <p class="feature-desc">A full synthesizer, a dedicated NES synth, and 500 beautiful built-in samples and drum kits. All free to use in your projects, right out of the box.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-gif"><img src="gifs/samplers.gif" alt="Samplers"></div>
+          <div class="feature-info">
+            <div class="feature-title">Samplers</div>
+            <p class="feature-desc">Built-in sampler and multi drum sampler with random multi-hit for sound effects and per-velocity sample triggering for expressive playback.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-gif"><img src="gifs/effects.gif" alt="Built-in Effects"></div>
+          <div class="feature-info">
+            <div class="feature-title">Built-in Effects</div>
+            <p class="feature-desc">Delay, reverb, chorus, and more. Shape your sound without leaving the app.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="snake-connector"></div>
+
+    <!-- ROW 3: WORKFLOW -->
+    <div class="features-row features-row--right">
+      <span class="corner-bevel corner-bevel--top-right"></span>
+      <div class="features-row-header">Workflow</div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-gif"><img src="gifs/chunks.gif" alt="Chunks &amp; Arrangement"></div>
+          <div class="feature-info">
+            <div class="feature-title">Chunks &amp; Arrangement</div>
+            <p class="feature-desc">Build reusable chunks, and arrange full songs.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-gif"><img src="gifs/import drop.gif" alt="Drag &amp; Drop Everything"></div>
+          <div class="feature-info">
+            <div class="feature-title">Drag &amp; Drop Everything</div>
+            <p class="feature-desc">It just works: drop in soundfonts, MIDI files, samples or folders. Zero setup.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-gif"><img src="gifs/palettes.gif" alt="Instrument Palettes"></div>
+          <div class="feature-info">
+            <div class="feature-title">Instrument Palettes</div>
+            <p class="feature-desc">Prebuilt swappable instrument palettes. Switch your entire sound in one click.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="snake-connector"></div>
+
+    <!-- ROW 4: POWER -->
+    <div class="features-row features-row--left">
+      <span class="corner-bevel corner-bevel--top-left"></span>
+      <div class="features-row-header">Power</div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-gif"><img src="gifs/engine.gif" alt="Dedicated Audio Engine"></div>
+          <div class="feature-info">
+            <div class="feature-title">Dedicated Audio Engine</div>
+            <p class="feature-desc">A separate audio engine decoupled from the UI. Built for realtime playback in your application or favorite game engine. Unity plugin included.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-gif"><img src="gifs/export.gif" alt="Export Anything"></div>
+          <div class="feature-info">
+            <div class="feature-title">Export Anything</div>
+            <p class="feature-desc">Export chunks, patterns, and full arrangements as MIDI or audio.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-gif"><img src="gifs/themes.gif" alt="Themes"></div>
+          <div class="feature-info">
+            <div class="feature-title">Themes</div>
+            <p class="feature-desc">Customize the look and feel of the application with various themes.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOTTOM CTA -->
+  <section class="bottom-cta" id="buy">
+    <div class="cta-heading-wrap">
+      <div class="heading-line">
+        <div class="heading-side heading-side--bar-left"></div>
+        <h2>Get Melowrite</h2>
+        <div class="heading-side"></div>
+      </div>
+    </div>
+    <p>Start writing music today.</p>
+    <div class="cta-buttons">
+      <a href="buy" class="btn-buy">Buy Now</a>
+      <a href="trial" class="btn-trial">Free Trial</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>&copy; 2026 Melowrite</span>
+  </footer>
+
+  <!-- Trailer: click-to-load YouTube facade (no third-party requests until play) -->
+  <script>
+    (function () {
+      var w = document.getElementById('trailer');
+      if (!w) return;
+      var id = w.getAttribute('data-yt');
+      w.style.backgroundImage = "url('https://i.ytimg.com/vi/" + id + "/maxresdefault.jpg')";
+      function play() {
+        var f = document.createElement('iframe');
+        f.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0';
+        f.title = 'Melowrite trailer';
+        f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+        f.allowFullscreen = true;
+        f.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:0;';
+        w.style.cursor = 'default';
+        w.innerHTML = '';
+        w.appendChild(f);
+      }
+      w.addEventListener('click', play);
+      w.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); play(); }
+      });
+    })();
+  </script>
+
+</body>
+</html>
