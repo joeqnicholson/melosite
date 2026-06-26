@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Melowrite - DAW for videogame music and fx</title>
-  <meta name="description" content="Melowrite is a focused MIDI DAW for composing video game music and audio — generate chords, lock to scales, and score your game without the bloat.">
+  <meta name="description" content="Melowrite is a focused MIDI DAW for composing video game music and audio - generate chords, lock to scales, and score your game without the bloat.">
   <link rel="canonical" href="https://www.melowrite.org/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Melowrite">
@@ -31,7 +31,7 @@
   <link rel="preload" as="image" href="images/logohover.png">
   <link rel="preload" as="image" href="images/logoclick.png">
   <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-  <!-- Google Analytics (GA4) — Measurement ID for www.melowrite.org -->
+  <!-- Google Analytics (GA4) - Measurement ID for www.melowrite.org -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-LC7XG6517F"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -337,7 +337,7 @@
     }
 
     /* 12px-tall bars sit flush to the bottom of the flex row, on the same
-       baseline as the h2's border-bottom — no sub-pixel drift */
+       baseline as the h2's border-bottom - no sub-pixel drift */
     .heading-side {
       flex: 1;
       height: 5px;
@@ -420,19 +420,19 @@
 
     /* ---- PIXEL BEVEL AT SNAKE CORNERS ----
        3×3 red squares sit in the exterior wedge of each concave L-bend,
-       with one corner of the square touching the concave point — a 1-pixel
+       with one corner of the square touching the concave point - a 1-pixel
        chamfer that rounds the sharp 90° inside corner */
     /* bevelled corners removed */
     .corner-bevel {
       display: none;
     }
 
-    /* each bend also gets a dark 3×3 chip at its convex outer corner —
+    /* each bend also gets a dark 3×3 chip at its convex outer corner -
        delivered via box-shadow offset so we don't need extra elements.
        inner red bevel + outer dark notch = chamfered 1-pixel corner */
 
     /* dark chip offset diagonally across the 12×12 bend-square from the
-       red inner bevel — lands on the convex outer corner of the bend */
+       red inner bevel - lands on the convex outer corner of the bend */
 
     /* heading → row 1 (right-down bend) */
     .heading-after--right::after {
@@ -475,7 +475,7 @@
       box-shadow: -12px 12px 0 var(--background);
     }
 
-    /* row 4 has no bottom bend — it flows straight into the CTA vertical —
+    /* row 4 has no bottom bend - it flows straight into the CTA vertical -
        so suppress the bottom bevel on the last features-row */
     .features-row--left:last-of-type::after {
       content: none;
