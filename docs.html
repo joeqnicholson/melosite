@@ -441,15 +441,20 @@
       <section class="docs-section" id="gameaudio">
         <h1>Game Audio API</h1>
         <p class="docs-subtitle">The same engine that plays your project in the editor ships inside your game.
-        Unity gets a C# middleware (source included, full IntelliSense); everything else can use the
-        single-DLL C API.</p>
+        Unity gets a C# middleware (source included, full IntelliSense) - and that middleware is plain,
+        host-agnostic C#, so any C# engine or framework (MonoGame, FNA, your own) runs it too.
+        Everything else can use the single-DLL C API.</p>
 
         <h2>Getting it</h2>
         <p><strong>Unity:</strong> install the package from the git URL (see Unity Integration) and export
         your project with <code>File &gt; Export Project...</code> (<kbd>Ctrl+E</kbd>), target
-        <code>Project</code>. <strong>Other engines (C / C++ / C#):</strong> export once with target
-        <code>Engine</code> - you get <code>Melowrite.Core.dll</code> (the whole engine in one file),
-        <code>melo.h</code>, and <code>Melo.cs</code> bindings. The header doubles as the full C API reference.</p>
+        <code>Project</code>. <strong>Other C# projects:</strong> the middleware is plain C# - reference
+        the managed <code>Melowrite.Core.dll</code> (plus its <code>miniaudio</code> decoder DLL), drop in
+        the middleware sources, feed <code>FillBuffer</code> from your audio callback and call
+        <code>Tick()</code> once per frame. The same API below applies unchanged.
+        <strong>Native engines (C / C++):</strong> export once with target <code>Engine</code> - you get
+        <code>Melowrite.Core.dll</code> (the whole engine in one file), <code>melo.h</code>, and
+        <code>Melo.cs</code> bindings. The header doubles as the full C API reference.</p>
 
         <h2>Play music</h2>
         <pre><code>var music = Melo.Load(song);          // or drop a MeloFile on a Melo Source component
