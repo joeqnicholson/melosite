@@ -225,6 +225,34 @@
       font-style: italic;
     }
 
+    .docs-content pre {
+      background: #f2f2f4;
+      border: 1px solid var(--line-color);
+      border-radius: 6px;
+      padding: 0.9rem 1rem;
+      margin: 0.8rem 0 1.4rem;
+      overflow-x: auto;
+      font-family: ui-monospace, Consolas, 'Courier New', monospace;
+      font-size: 0.85rem;
+      line-height: 1.55;
+      color: var(--text);
+    }
+
+    .docs-content code {
+      font-family: ui-monospace, Consolas, 'Courier New', monospace;
+      font-size: 0.88em;
+      color: var(--text);
+      background: #f2f2f4;
+      border-radius: 4px;
+      padding: 1px 4px;
+    }
+
+    .docs-content pre code {
+      background: none;
+      border-radius: 0;
+      padding: 0;
+    }
+
     .docs-placeholder {
       color: var(--line-color);
       font-style: italic;
@@ -316,6 +344,7 @@
       <li><a href="#overview" data-target="overview" class="active">Overview</a></li>
       <li><a href="#shortcuts" data-target="shortcuts">Shortcuts</a></li>
       <li><a href="#unity" data-target="unity">Unity Integration</a></li>
+      <li><a href="#gameaudio" data-target="gameaudio">Game Audio API</a></li>
     </ul>
 
     <div class="docs-content">
@@ -407,6 +436,62 @@
           <tr><td>Velocity down / up</td><td><kbd>C</kbd> / <kbd>V</kbd></td></tr>
           <tr><td>Open Musical Typing window</td><td><kbd>Shift+K</kbd></td></tr>
         </table>
+      </section>
+
+      <section class="docs-section" id="gameaudio">
+        <h1>Game Audio API</h1>
+        <p class="docs-subtitle">The same engine that plays your project in the editor ships inside your game.
+        Unity gets a C# middleware (source included, full IntelliSense); everything else can use the
+        single-DLL C API.</p>
+
+        <h2>Getting it</h2>
+        <p><strong>Unity:</strong> install the package from the git URL (see Unity Integration) and export
+        your project with <code>File &gt; Export Project...</code> (<kbd>Ctrl+E</kbd>), target
+        <code>Project</code>. <strong>Other engines (C / C++ / C#):</strong> export once with target
+        <code>Engine</code> - you get <code>Melowrite.Core.dll</code> (the whole engine in one file),
+        <code>melo.h</code>, and <code>Melo.cs</code> bindings. The header doubles as the full C API reference.</p>
+
+        <h2>Play music</h2>
+        <pre><code>var music = Melo.Load(song);          // or drop a MeloFile on a Melo Source component
+music.PlayChunk("Explore");
+music.SwitchChunk("Combat");          // quantized: lands on the next bar
+music.SwitchSong(bossSong, MeloSwitch.Bar);
+music.PlayChunkCrossfade("Bridge", 1.5f);</code></pre>
+
+        <h2>SFX banks</h2>
+        <p>Author a .melo as a sound bank: tracks are categories, multisampler pads are named sounds -
+        with the volume, pitch, envelopes, and random/velocity variations you set in the editor.</p>
+        <pre><code>var sfx = Melo.Load(bank);
+sfx.Trigger("Footsteps", "Grass");                  // one-shot, overlaps itself
+sfx.Trigger("Footsteps", "Grass", 1f, pan: -0.5f);  // per-trigger stereo position
+sfx.Hold("Ambience", "EngineHum");                  // hold until Release()
+sfx.Release("Ambience", "EngineHum");
+sfx.Sustain("Weapons", "ChargeLoop");               // call every frame; auto-releases when you stop</code></pre>
+
+        <h2>One-shots</h2>
+        <p>Raw audio files (wav / mp3 / ogg / flac) or Unity <code>AudioClip</code>s, no project needed:</p>
+        <pre><code>Melo.PlayOneShot("SFX/hit.wav");
+Melo.PlayOneShot(myAudioClip, volume: 0.8f, pan: 0.3f);</code></pre>
+
+        <h2>Live mix control</h2>
+        <pre><code>music.SetTrackMuted("Bass", true);
+music.Track("Lead").Volume = 0.7f;
+if (music.Bus("Reverb").TryGetEffect&lt;MeloReverb&gt;(out var rev)) rev.Mix = 0.6f;</code></pre>
+
+        <h2>Going deeper</h2>
+        <p>The wrappers cover the common calls, but the whole engine is public C# - the same classes the
+        editor edits. <code>music.Engine</code> is the raw engine, and
+        <code>Track("x").Instrument</code> hands you the live instrument (sampler slots, ADSR,
+        random/velocity modes, pads) to read or change at runtime. The
+        <a href="https://github.com/joeqnicholson/melowrite-unity">plugin README</a> has the full tour.</p>
+
+        <h2>Native C / C++</h2>
+        <pre><code>MeloHandle h = melo_load("music.melo", 44100);
+melo_play_arrangement(h);
+melo_fill_buffer(h, buffer, frames);                 // your audio callback
+melo_trigger_pad(h, fs, "grass", 1.0f, 0.0f);        // SFX bank trigger (velocity, pan)</code></pre>
+        <p>Everything above has a C export - see <code>melo.h</code> in the Engine export for the
+        complete, commented API.</p>
       </section>
 
       <section class="docs-section" id="unity">
