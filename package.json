@@ -1,0 +1,10 @@
+{
+  "name": "melosite",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Melowrite landing site",
+  "scripts": {
+    "dev": "serve -l 3000",
+    "start": "serve -l 3000"
+  }
+}
