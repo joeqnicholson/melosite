@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <script src="theme.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Melowrite - DAW for videogame music and fx</title>
   <meta name="description" content="Melowrite is a focused MIDI DAW for composing video game music and audio - generate chords, lock to scales, and score your game without the bloat.">
@@ -700,6 +701,7 @@
       }
     }
   </style>
+  <link rel="stylesheet" href="theme.css">
 </head>
 <body>
 
@@ -710,6 +712,12 @@
       <li><a href="#features">Features</a></li>
       <li><a href="docs" class="nav-trial">Docs</a></li>
       <li><a href="buy" class="nav-buy">Buy</a></li>
+      <li>
+        <button type="button" class="theme-toggle" aria-label="Switch to dark mode" aria-pressed="false" title="Switch to dark mode">
+          <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.9 13.1A9 9 0 0 1 10.9 3.1 9 9 0 1 0 20.9 13.1Z"/></svg>
+          <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg>
+        </button>
+      </li>
     </ul>
   </nav>
 
@@ -717,6 +725,7 @@
   <section class="hero">
     <div class="logo-mark">
       <img class="logo-light" src="images/melowritelogolight.png" alt="Melowrite">
+      <img class="logo-dark" src="images/melowritelogodark.png" alt="Melowrite">
     </div>
     <p class="tagline">Game music DAW and audio middleware.</p>
     <div class="cta-buttons">
@@ -756,21 +765,21 @@
       <div class="features-row-header">Sound</div>
       <div class="features-grid">
         <div class="feature-card">
-          <div class="feature-gif"><img src="gifs/presets.gif" alt="Built-in Instruments"></div>
+          <div class="feature-gif"><img src="gifs/light/presets.gif" data-light-src="gifs/light/presets.gif" data-dark-src="gifs/dark/presets.gif" alt="Built-in Instruments"></div>
           <div class="feature-info">
             <div class="feature-title">Instruments</div>
             <p class="feature-desc">A full synthesizer, a dedicated NES synth, and 500 beautiful built-in samples and drum kits. All free to use in your projects, right out of the box.</p>
           </div>
         </div>
         <div class="feature-card">
-          <div class="feature-gif"><img src="gifs/samplers.gif" alt="Samplers"></div>
+          <div class="feature-gif"><img src="gifs/light/samplers.gif" data-light-src="gifs/light/samplers.gif" data-dark-src="gifs/dark/samplers.gif" alt="Samplers"></div>
           <div class="feature-info">
             <div class="feature-title">Samplers</div>
             <p class="feature-desc">Built-in sampler and multi drum sampler with random multi-hit for sound effects and per-velocity sample triggering for expressive playback.</p>
           </div>
         </div>
         <div class="feature-card">
-          <div class="feature-gif"><img src="gifs/effects.gif" alt="Built-in Effects"></div>
+          <div class="feature-gif"><img src="gifs/light/effects.gif" data-light-src="gifs/light/effects.gif" data-dark-src="gifs/dark/effects.gif" alt="Built-in Effects"></div>
           <div class="feature-info">
             <div class="feature-title">Effects</div>
             <p class="feature-desc">Delay, reverb, chorus, and more. Shape your sound without leaving the app.</p>
@@ -787,21 +796,21 @@
       <div class="features-row-header">Workflow</div>
       <div class="features-grid">
         <div class="feature-card">
-          <div class="feature-gif"><img src="gifs/chunks.gif" alt="Chunks &amp; Arrangement"></div>
+          <div class="feature-gif"><img src="gifs/light/chunks.gif" data-light-src="gifs/light/chunks.gif" data-dark-src="gifs/dark/chunks.gif" alt="Chunks &amp; Arrangement"></div>
           <div class="feature-info">
             <div class="feature-title">Chunks &amp; Arrangement</div>
             <p class="feature-desc">Build reusable chunks, and arrange full songs.</p>
           </div>
         </div>
         <div class="feature-card">
-          <div class="feature-gif"><img src="gifs/import drop.gif" alt="Drag &amp; Drop Everything"></div>
+          <div class="feature-gif"><img src="gifs/light/import drop.gif" data-light-src="gifs/light/import drop.gif" data-dark-src="gifs/dark/import drop.gif" alt="Drag &amp; Drop Everything"></div>
           <div class="feature-info">
             <div class="feature-title">Drag &amp; Drop Everything</div>
             <p class="feature-desc">It just works: drop in soundfonts, MIDI files, samples or folders. Zero setup.</p>
           </div>
         </div>
         <div class="feature-card">
-          <div class="feature-gif"><img src="gifs/palettes.gif" alt="Instrument Palettes"></div>
+          <div class="feature-gif"><img src="gifs/light/palettes.gif" data-light-src="gifs/light/palettes.gif" data-dark-src="gifs/dark/palettes.gif" alt="Instrument Palettes"></div>
           <div class="feature-info">
             <div class="feature-title">Instrument Palettes</div>
             <p class="feature-desc">Prebuilt swappable instrument palettes. Switch your entire sound in one click.</p>
@@ -817,21 +826,21 @@
       <div class="features-row-header">Compose</div>
       <div class="features-grid">
         <div class="feature-card">
-          <div class="feature-gif"><img src="gifs/chords.gif" alt="Procedural Chords"></div>
+          <div class="feature-gif"><img src="gifs/light/chords.gif" data-light-src="gifs/light/chords.gif" data-dark-src="gifs/dark/chords.gif" alt="Procedural Chords"></div>
           <div class="feature-info">
             <div class="feature-title">Procedural Chords</div>
             <p class="feature-desc"> Create chord progressions and melodies with the push of button, be a player or a tastemaker.</p>
           </div>
         </div>
         <div class="feature-card">
-          <div class="feature-gif"><img src="gifs/scalelock.gif" alt="Scale Locking"></div>
+          <div class="feature-gif"><img src="gifs/light/scalelock.gif" data-light-src="gifs/light/scalelock.gif" data-dark-src="gifs/dark/scalelock.gif" alt="Scale Locking"></div>
           <div class="feature-info">
             <div class="feature-title">Scale Locking</div>
             <p class="feature-desc">Never play a wrong note, detect scales and swap moods with one click.</p>
           </div>
         </div>
         <div class="feature-card">
-          <div class="feature-gif"><img src="gifs/drawplay.gif" alt="MIDI Draw &amp; Recording"></div>
+          <div class="feature-gif"><img src="gifs/light/drawplay.gif" data-light-src="gifs/light/drawplay.gif" data-dark-src="gifs/dark/drawplay.gif" alt="MIDI Draw &amp; Recording"></div>
           <div class="feature-info">
             <div class="feature-title">MIDI Draw &amp; Recording</div>
             <p class="feature-desc">Draw notes directly, overdub layers or capture multi MIDI takes and choose your favorite.</p>
@@ -848,21 +857,21 @@
       <div class="features-row-header">Power</div>
       <div class="features-grid">
         <div class="feature-card">
-          <div class="feature-gif"><img src="gifs/engine.gif" alt="Dedicated Audio Engine"></div>
+          <div class="feature-gif"><img src="gifs/light/engine.gif" data-light-src="gifs/light/engine.gif" data-dark-src="gifs/dark/engine.gif" alt="Dedicated Audio Engine"></div>
           <div class="feature-info">
             <div class="feature-title">Dedicated Audio Engine</div>
             <p class="feature-desc">A separate audio engine decoupled from the UI. Built for realtime playback in your application or favorite game engine. Unity plugin included.</p>
           </div>
         </div>
         <div class="feature-card">
-          <div class="feature-gif"><img src="gifs/export.gif" alt="Export Anything"></div>
+          <div class="feature-gif"><img src="gifs/light/export.gif" data-light-src="gifs/light/export.gif" data-dark-src="gifs/dark/export.gif" alt="Export Anything"></div>
           <div class="feature-info">
             <div class="feature-title">Export Anything</div>
             <p class="feature-desc">Export chunks, patterns, and full arrangements as MIDI or audio.</p>
           </div>
         </div>
         <div class="feature-card">
-          <div class="feature-gif"><img src="gifs/themes.gif" alt="Themes"></div>
+          <div class="feature-gif"><img src="gifs/light/themes.gif" data-light-src="gifs/light/themes.gif" data-dark-src="gifs/dark/themes.gif" alt="Themes"></div>
           <div class="feature-info">
             <div class="feature-title">Themes</div>
             <p class="feature-desc">Customize the look and feel of the application with various themes.</p>

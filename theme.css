@@ -1,0 +1,134 @@
+:root {
+  color-scheme: light;
+  --top-bar: #b2bec3;
+  --header-text: #ffffff;
+}
+
+.logo-mark .logo-dark,
+[data-theme="dark"] .logo-mark .logo-light {
+  display: none;
+}
+
+[data-theme="dark"] .logo-mark .logo-dark {
+  display: block;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --background: #22273f;
+  --accent: #5b7193;
+  --complement: #6e5b93;
+  --line-color: #f8f4f4;
+  --top-bar: #3b415e;
+  --header-text: #ffffff;
+  --text: #ffffff;
+  --subtext: #d4d4d4;
+  --line: 2px;
+  --radius: 6px;
+  --radius-lg: 12px;
+}
+
+.nav-links {
+  align-items: center;
+}
+
+nav {
+  background: var(--top-bar);
+}
+
+nav .nav-links a,
+nav .nav-links a:hover {
+  color: var(--header-text);
+}
+
+nav .nav-links a.nav-trial {
+  border-color: var(--header-text);
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 5px;
+  color: var(--header-text);
+  background: transparent;
+  border: 2px solid currentColor;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  background: var(--complement);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--header-text);
+  outline-offset: 4px;
+}
+
+.theme-toggle svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.theme-toggle .theme-sun,
+[data-theme="dark"] .theme-toggle .theme-moon {
+  display: none;
+}
+
+[data-theme="dark"] .theme-toggle .theme-sun {
+  display: block;
+}
+
+[data-theme="dark"] nav,
+[data-theme="dark"] footer {
+  background: var(--background);
+  border-color: var(--line-color);
+}
+
+[data-theme="dark"] nav {
+  background: var(--top-bar);
+}
+
+[data-theme="dark"] kbd,
+[data-theme="dark"] .docs-content pre,
+[data-theme="dark"] .docs-content code {
+  background: var(--complement);
+}
+
+[data-theme="dark"] .docs-content pre code {
+  background: none;
+}
+
+/* Lift colored foregrounds for readable text on the dark background. */
+[data-theme="dark"] .tagline span,
+[data-theme="dark"] .features-row-header,
+[data-theme="dark"] .feature-label,
+[data-theme="dark"] .docs-content h1,
+[data-theme="dark"] .docs-content h2,
+[data-theme="dark"] .docs-content a,
+[data-theme="dark"] .docs-sidebar a.active,
+[data-theme="dark"] .btn-trial {
+  color: var(--subtext);
+}
+
+[data-theme="dark"] footer a:hover {
+  color: var(--text);
+}
+
+@media (max-width: 400px) {
+  nav {
+    padding-inline: 0.75rem;
+  }
+
+  .nav-links {
+    gap: 0.5rem;
+  }
+}
