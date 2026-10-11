@@ -9,7 +9,6 @@
   <link rel="preload" as="image" href="images/logohover.png">
   <link rel="preload" as="image" href="images/logoclick.png">
   <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-  <!-- Google Analytics (GA4) - Measurement ID for www.melowrite.org -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-LC7XG6517F"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -43,7 +42,6 @@
       overflow-x: hidden;
     }
 
-    /* ---- NAV ---- */
     nav {
       position: fixed;
       top: 0;
@@ -110,7 +108,6 @@
       padding: 0.4rem 0.9rem;
     }
 
-    /* ---- DOCS ---- */
     .docs {
       max-width: 1100px;
       margin: 0 auto;
@@ -267,7 +264,6 @@
       display: block;
     }
 
-    /* ---- FOOTER ---- */
     footer {
       background: #677e9c;
       border-top: var(--line) solid #677e9c;
@@ -330,7 +326,6 @@
 </head>
 <body>
 
-  <!-- NAV -->
   <nav>
     <a href="/" class="nav-logo">Melowrite</a>
     <ul class="nav-links">
@@ -346,7 +341,6 @@
     </ul>
   </nav>
 
-  <!-- DOCS -->
   <main class="docs">
     <ul class="docs-sidebar">
       <li><a href="#overview" data-target="overview" class="active">Overview</a></li>
@@ -458,7 +452,6 @@
     </div>
   </main>
 
-  <!-- FOOTER -->
   <footer>
     <span>&copy; 2026 Melowrite</span>
   </footer>
@@ -486,7 +479,6 @@
         });
       });
 
-      // Honor a #section in the URL on load, otherwise keep Overview.
       var hash = window.location.hash.replace('#', '');
       if (hash && document.getElementById(hash)) show(hash);
     })();

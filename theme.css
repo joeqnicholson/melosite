@@ -2,15 +2,11 @@
   color-scheme: light;
   --top-bar: #b2bec3;
   --header-text: #ffffff;
-}
-
-.logo-mark .logo-dark,
-[data-theme="dark"] .logo-mark .logo-light {
-  display: none;
-}
-
-[data-theme="dark"] .logo-mark .logo-dark {
-  display: block;
+  --logo-words: #9652c8;
+  --logo-words-dark: #532d8f;
+  --logo-words-shadow: #c6d6d9;
+  --logo-instruments: #f4ffff;
+  --logo-instruments-outline: #677e9c;
 }
 
 :root[data-theme="dark"] {
@@ -26,6 +22,11 @@
   --line: 2px;
   --radius: 6px;
   --radius-lg: 12px;
+  --logo-words: #b373ff;
+  --logo-words-dark: #3a127e;
+  --logo-words-shadow: #05042e;
+  --logo-instruments: #ffffff;
+  --logo-instruments-outline: #1f162e;
 }
 
 .nav-links {
@@ -107,7 +108,6 @@ nav .nav-links a.nav-trial {
   background: none;
 }
 
-/* Lift colored foregrounds for readable text on the dark background. */
 [data-theme="dark"] .tagline span,
 [data-theme="dark"] .features-row-header,
 [data-theme="dark"] .feature-label,

@@ -8,7 +8,6 @@
   try {
     preference = localStorage.getItem('melowrite-theme');
   } catch (error) {
-    // Theme switching still works when browser storage is unavailable.
   }
 
   if (preference !== 'dark' && preference !== 'light') preference = null;
@@ -45,7 +44,6 @@
     }
   }
 
-  // Set the theme before the page renders to avoid a flash of the wrong colors.
   applyTheme(preference || (systemTheme.matches ? 'dark' : 'light'));
 
   document.addEventListener('DOMContentLoaded', function () {
@@ -57,7 +55,6 @@
       try {
         localStorage.setItem('melowrite-theme', preference);
       } catch (error) {
-        // Keep the selection for this visit even if storage is blocked.
       }
       applyTheme(preference);
     });

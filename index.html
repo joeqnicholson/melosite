@@ -12,11 +12,11 @@
   <meta property="og:title" content="Melowrite - DAW for videogame music and fx">
   <meta property="og:description" content="A focused MIDI DAW for composing video game music and audio. Generate chords, lock to scales, and score your game.">
   <meta property="og:url" content="https://www.melowrite.org/">
-  <meta property="og:image" content="https://www.melowrite.org/images/melowritelogolight.png">
+  <meta property="og:image" content="https://www.melowrite.org/images/melowritelogodark.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Melowrite - DAW for videogame music and fx">
   <meta name="twitter:description" content="A focused MIDI DAW for composing video game music and audio.">
-  <meta name="twitter:image" content="https://www.melowrite.org/images/melowritelogolight.png">
+  <meta name="twitter:image" content="https://www.melowrite.org/images/melowritelogodark.png">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -32,7 +32,6 @@
   <link rel="preload" as="image" href="images/logohover.png">
   <link rel="preload" as="image" href="images/logoclick.png">
   <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-  <!-- Google Analytics (GA4) - Measurement ID for www.melowrite.org -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-LC7XG6517F"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -47,8 +46,6 @@
       box-sizing: border-box;
     }
 
-    /* always reserve the vertical scrollbar so the viewport width can't jump
-       (and re-trigger layout) as content height crosses the window height */
     html {
       overflow-y: scroll;
     }
@@ -72,7 +69,6 @@
       overflow-x: hidden;
     }
 
-    /* ---- NAV ---- */
     nav {
       position: fixed;
       top: 0;
@@ -139,7 +135,6 @@
       padding: 0.4rem 0.9rem;
     }
 
-    /* ---- HERO ---- */
     .hero {
       min-height: 100vh;
       display: flex;
@@ -159,14 +154,23 @@
       margin-bottom: 2rem;
     }
 
-    .logo-mark img {
+    .logo-mark {
       display: block;
       width: min(620px, calc(100vw - 4rem));
       height: auto;
+    }
+
+    .logo-mark image {
       image-rendering: pixelated;
       image-rendering: -moz-crisp-edges;
       image-rendering: crisp-edges;
     }
+
+    #logo-tint-words feFlood { flood-color: var(--logo-words); }
+    #logo-tint-words-dark feFlood { flood-color: var(--logo-words-dark); }
+    #logo-tint-words-shadow feFlood { flood-color: var(--logo-words-shadow); }
+    #logo-tint-instruments feFlood { flood-color: var(--logo-instruments); }
+    #logo-tint-instruments-outline feFlood { flood-color: var(--logo-instruments-outline); }
 
 .tagline {
       font-size: clamp(1rem, 2vw, 1.3rem);
@@ -180,7 +184,6 @@
       color: var(--accent);
     }
 
-    /* ---- BUTTONS ---- */
     .btn-buy {
       display: inline-block;
       padding: 1rem 3rem;
@@ -238,7 +241,6 @@
       flex-wrap: wrap;
     }
 
-    /* ---- VIDEO ---- */
     .video-section {
       padding: 4rem 2rem 6rem;
       display: flex;
@@ -290,7 +292,6 @@
       margin-left: 4px;
     }
 
-    /* ---- FEATURES GRID ---- */
     .features-section {
       padding: 4rem 2rem 0;
       max-width: 1100px;
@@ -323,9 +324,6 @@
       margin-bottom: 0;
     }
 
-    /* ---- SNAKE PATH ---- */
-    /* heading underline -> corner extension -> vertical drop -> row side bar
-       -> full-width connector -> mirror -> final underline at bottom cta */
 
     .features-heading {
       margin-bottom: 0;
@@ -337,8 +335,6 @@
       margin-bottom: 0;
     }
 
-    /* 12px-tall bars sit flush to the bottom of the flex row, on the same
-       baseline as the h2's border-bottom - no sub-pixel drift */
     .heading-side {
       flex: 1;
       height: 5px;
@@ -365,9 +361,6 @@
       margin: 0;
     }
 
-    /* .heading-after sits directly below the heading-line inside .features-heading,
-       so its top is exactly at the h2 underline y. The vertical bar pseudo-element
-       spans from that y down to row 1's top, closing the gap. */
     .heading-after {
       position: relative;
       padding: 1.2rem 0 2rem;
@@ -401,8 +394,6 @@
     .features-row--right::before { right: 0; }
     .features-row--left::before  { left: 0; }
 
-    /* CTA heading. Horizontal padding is supplied by .bottom-cta so the
-       vertical bar aligns with row bars at every viewport width. */
     .cta-heading-wrap {
       position: relative;
       margin-bottom: 1rem;
@@ -419,44 +410,30 @@
       background: var(--line-color);
     }
 
-    /* ---- PIXEL BEVEL AT SNAKE CORNERS ----
-       3×3 red squares sit in the exterior wedge of each concave L-bend,
-       with one corner of the square touching the concave point - a 1-pixel
-       chamfer that rounds the sharp 90° inside corner */
-    /* bevelled corners removed */
     .corner-bevel {
       display: none;
     }
 
-    /* each bend also gets a dark 3×3 chip at its convex outer corner -
-       delivered via box-shadow offset so we don't need extra elements.
-       inner red bevel + outer dark notch = chamfered 1-pixel corner */
 
-    /* dark chip offset diagonally across the 12×12 bend-square from the
-       red inner bevel - lands on the convex outer corner of the bend */
 
-    /* heading to row 1 (right-down bend) */
     .heading-after--right::after {
       top: 0;
       right: 12px;
       box-shadow: 12px -12px 0 var(--background);
     }
 
-    /* row bottom, right bar (down-left bend) */
     .features-row--right::after {
       bottom: 0;
       right: 12px;
       box-shadow: 12px 12px 0 var(--background);
     }
 
-    /* row bottom, left bar (down-right bend) */
     .features-row--left::after {
       bottom: 0;
       left: 12px;
       box-shadow: -12px 12px 0 var(--background);
     }
 
-    /* top-of-row bevels for rows entered via a connector */
     .corner-bevel--top-left {
       top: 0;
       left: 12px;
@@ -469,15 +446,12 @@
       box-shadow: 12px -12px 0 var(--background);
     }
 
-    /* vertical drop to start writing music (down-right bend) */
     .cta-heading-wrap::after {
       bottom: 12px;
       left: 12px;
       box-shadow: -12px 12px 0 var(--background);
     }
 
-    /* row 4 has no bottom bend - it flows straight into the CTA vertical -
-       so suppress the bottom bevel on the last features-row */
     .features-row--left:last-of-type::after {
       content: none;
     }
@@ -565,7 +539,6 @@
       line-height: 1.5;
     }
 
-    /* ---- BOTTOM CTA ---- */
     .bottom-cta {
       max-width: 1100px;
       margin: 0 auto;
@@ -591,7 +564,6 @@
       font-size: 1rem;
     }
 
-    /* ---- FOOTER ---- */
     footer {
       background: #677e9c;
       border-top: var(--line) solid #677e9c;
@@ -613,13 +585,7 @@
       color: var(--accent);
     }
 
-    /* ---- RESPONSIVE ---- */
 
-    /* The snake path is hand-tuned to the full 3-column desktop grid. At any
-       narrower width (tablet 2-col, phone 1-col) its absolutely-positioned
-       bars no longer line up, so it visibly breaks and reflows while resizing.
-       Hide it entirely below the 3-col layout and center the headings that the
-       snake bars used to flank. */
     @media (max-width: 1024px) {
       .heading-side,
       .snake-connector,
@@ -705,7 +671,6 @@
 </head>
 <body>
 
-  <!-- NAV -->
   <nav>
     <a href="/" class="nav-logo">Melowrite</a>
     <ul class="nav-links">
@@ -721,12 +686,21 @@
     </ul>
   </nav>
 
-  <!-- HERO -->
   <section class="hero">
-    <div class="logo-mark">
-      <img class="logo-light" src="images/melowritelogolight.png" alt="Melowrite">
-      <img class="logo-dark" src="images/melowritelogodark.png" alt="Melowrite">
-    </div>
+    <svg class="logo-mark" viewBox="0 0 410 158" role="img" aria-label="Melowrite">
+      <defs>
+        <filter id="logo-tint-words" color-interpolation-filters="sRGB"><feFlood/><feComposite in2="SourceAlpha" operator="in"/></filter>
+        <filter id="logo-tint-words-dark" color-interpolation-filters="sRGB"><feFlood/><feComposite in2="SourceAlpha" operator="in"/></filter>
+        <filter id="logo-tint-words-shadow" color-interpolation-filters="sRGB"><feFlood/><feComposite in2="SourceAlpha" operator="in"/></filter>
+        <filter id="logo-tint-instruments" color-interpolation-filters="sRGB"><feFlood/><feComposite in2="SourceAlpha" operator="in"/></filter>
+        <filter id="logo-tint-instruments-outline" color-interpolation-filters="sRGB"><feFlood/><feComposite in2="SourceAlpha" operator="in"/></filter>
+      </defs>
+      <svg viewBox="0 0 410 158"><image href="images/melowritelogosheet.png" width="2050" height="158" filter="url(#logo-tint-words)"/></svg>
+      <svg viewBox="410 0 410 158"><image href="images/melowritelogosheet.png" width="2050" height="158" filter="url(#logo-tint-words-dark)"/></svg>
+      <svg viewBox="820 0 410 158"><image href="images/melowritelogosheet.png" width="2050" height="158" filter="url(#logo-tint-words-shadow)"/></svg>
+      <svg viewBox="1230 0 410 158"><image href="images/melowritelogosheet.png" width="2050" height="158" filter="url(#logo-tint-instruments)"/></svg>
+      <svg viewBox="1640 0 410 158"><image href="images/melowritelogosheet.png" width="2050" height="158" filter="url(#logo-tint-instruments-outline)"/></svg>
+    </svg>
     <p class="tagline">Game music DAW and audio middleware.</p>
     <div class="cta-buttons">
       <a href="buy" class="btn-buy">Buy Now</a>
@@ -734,7 +708,6 @@
     </div>
   </section>
 
-  <!-- VIDEO -->
   <section class="video-section">
     <div class="video-wrapper" id="trailer" data-yt="HNwweklKwHQ"
          role="button" tabindex="0" aria-label="Play the Melowrite trailer">
@@ -746,7 +719,6 @@
     </div>
   </section>
 
-  <!-- FEATURES -->
   <section class="features-section" id="features">
     <div class="features-heading">
       <div class="heading-line">
@@ -759,7 +731,6 @@
       </div>
     </div>
 
-    <!-- ROW 1: SOUND -->
     <div class="features-row features-row--right">
       
       <div class="features-row-header">Sound</div>
@@ -790,7 +761,6 @@
 
     <div class="snake-connector"></div>
 
-    <!-- ROW 2: WORKFLOW -->
     <div class="features-row features-row--left">
       <span class="corner-bevel corner-bevel--top-left"></span>
       <div class="features-row-header">Workflow</div>
@@ -821,7 +791,6 @@
 
     <div class="snake-connector"></div>
 
-    <!-- ROW 3: COMPOSE -->
     <div class="features-row features-row--right">
       <div class="features-row-header">Compose</div>
       <div class="features-grid">
@@ -851,7 +820,6 @@
 
     <div class="snake-connector"></div>
 
-    <!-- ROW 4: POWER -->
     <div class="features-row features-row--left">
       <span class="corner-bevel corner-bevel--top-left"></span>
       <div class="features-row-header">Power</div>
@@ -881,7 +849,6 @@
     </div>
   </section>
 
-  <!-- BOTTOM CTA -->
   <section class="bottom-cta" id="buy">
     <div class="cta-heading-wrap">
       <div class="heading-line">
@@ -897,12 +864,10 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <span>&copy; 2026 Melowrite</span>
   </footer>
 
-  <!-- Trailer: click-to-load YouTube facade (no third-party requests until play) -->
   <script>
     (function () {
       var w = document.getElementById('trailer');
