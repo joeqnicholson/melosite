@@ -132,11 +132,3 @@ nav .nav-links a.nav-trial {
     gap: 0.5rem;
   }
 }
-
-/* Keep the full navigation usable on small screens. */
-@media (max-width: 480px) {
-  nav { gap: 0.75rem; }
-  .nav-links { flex-wrap: wrap; justify-content: flex-end; gap: 0.5rem; }
-  .nav-links a { font-size: 0.65rem; letter-spacing: 0.3px; }
-  nav .nav-links a.nav-trial, nav .nav-links a.nav-buy { padding: 0.35rem 0.4rem; }
-}
