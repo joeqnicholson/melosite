@@ -1,0 +1,35 @@
+MELOWRITE FREE RUNTIME LICENSE
+
+Copyright (c) 2026 Joe Nicholson. All rights reserved except as granted below.
+
+This license covers the Melowrite audio engine binaries, middleware, API
+bindings, host adapters and Unity integration code distributed with this file
+(the "Runtime"). It is independent of the Melowrite desktop application EULA.
+
+Permission is granted, free of charge and without royalties, to any person or
+organization obtaining the Runtime to:
+
+1. Use the Runtime in personal, educational and commercial projects, without
+   purchasing the Melowrite desktop application or paying a subscription.
+2. Copy and redistribute the Runtime with games and other applications,
+   including commercial applications, and redistribute unmodified Runtime
+   packages with this license and the accompanying third-party notices.
+3. Modify the integration source files supplied with the Runtime and distribute
+   those modifications with applications using the Runtime.
+
+Keep this license and the applicable third-party notices with redistributed
+copies. No in-game logo, splash screen or promotional credit is required.
+You retain ownership of your applications and content, and you do not need to
+publish their source code.
+
+The Runtime remains proprietary. This license does not grant access to the
+engine's source code or rights to the Melowrite desktop application, its user
+interface, branding, artwork or bundled sound libraries. Music, samples,
+SoundFonts, impulse responses and other content retain their own licenses.
+Third-party components retain their original licenses; those licenses govern
+their respective components and are not restricted by this license.
+
+THE RUNTIME IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. TO THE EXTENT PERMITTED BY LAW, THE COPYRIGHT HOLDERS ARE NOT
+LIABLE FOR CLAIMS, DAMAGES OR OTHER LIABILITY ARISING FROM USE OF THE RUNTIME.

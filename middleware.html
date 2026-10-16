@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="theme.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Audio Middleware - Melowrite</title>
+  <meta name="description" content="Download the free Melowrite audio engine for Unity, C#/.NET and C/C++ games. Free commercial use, no royalties or app purchase required.">
+  <link rel="canonical" href="https://www.melowrite.org/middleware">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Melowrite">
+  <meta property="og:title" content="Free Audio Middleware - Melowrite">
+  <meta property="og:description" content="Free audio middleware for Unity, C#/.NET and C/C++ games. No royalties or app purchase required.">
+  <meta property="og:url" content="https://www.melowrite.org/middleware">
+  <meta property="og:image" content="https://www.melowrite.org/images/melowritelogodark.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Free Audio Middleware - Melowrite">
+  <meta name="twitter:description" content="Free audio middleware for Unity, C#/.NET and C/C++ games. No royalties or app purchase required.">
+  <meta name="twitter:image" content="https://www.melowrite.org/images/melowritelogodark.png">
+  <link rel="icon" href="images/icon.ico" type="image/x-icon">
+  <link rel="preload" as="image" href="images/logohover.png">
+  <link rel="preload" as="image" href="images/logoclick.png">
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LC7XG6517F"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LC7XG6517F');
+  </script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --background: #ffffff;
+      --accent: #5b7193;
+      --complement: #6e5b93;
+      --line-color: #b2bec3;
+      --text: #000000;
+      --subtext: #525252;
+      --line: 2px;
+      --radius: 6px;
+      --radius-lg: 12px;
+    }
+
+    body {
+      background: var(--background);
+      color: var(--text);
+      font-family: 'IBM Plex Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 0.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--line-color);
+      border-bottom: var(--line) solid var(--line-color);
+    }
+
+    .nav-logo {
+      display: block;
+      width: 56px;
+      height: 56px;
+      background: url(images/logo.png) no-repeat center / contain;
+      image-rendering: pixelated;
+      text-indent: -9999px;
+      overflow: hidden;
+    }
+
+    .nav-logo:hover {
+      background-image: url(images/logohover.png);
+    }
+
+    .nav-logo:active {
+      background-image: url(images/logoclick.png);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Google Sans', sans-serif;
+      font-weight: 700;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #ffffff;
+    }
+
+    .nav-links a.nav-buy {
+      background: var(--complement);
+      color: #ffffff;
+      border: none;
+      border-radius: var(--radius);
+      padding: 0.4rem 0.9rem;
+    }
+
+    .nav-links a.nav-trial {
+      border: 2px solid #ffffff;
+      border-radius: var(--radius);
+      padding: 0.4rem 0.9rem;
+    }
+
+    .trial {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 4rem;
+    }
+
+    .trial h1 {
+      font-family: 'Google Sans', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      color: var(--line-color);
+      margin-bottom: 0.8rem;
+    }
+
+    .trial p {
+      color: var(--subtext);
+      font-size: 1rem;
+      max-width: 480px;
+      margin: 0 auto 0.8rem;
+      line-height: 1.6;
+    }
+
+    .trial .trial-warning {
+      color: #c43b42;
+      font-weight: 700;
+      letter-spacing: 1px;
+      max-width: none;
+      margin-bottom: 2.5rem;
+    }
+
+    .download-btn {
+      display: inline-block;
+      padding: 1rem 3rem;
+      font-family: 'Google Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #ffffff;
+      background: var(--complement);
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .download-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .download-btn:active {
+      transform: translateY(0);
+    }
+
+    footer {
+      background: #677e9c;
+      border-top: var(--line) solid #677e9c;
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: #ffffff;
+    }
+
+    footer a {
+      color: var(--subtext);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    footer a:hover {
+      color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 0.5rem 1.2rem;
+      }
+
+      .nav-logo {
+        width: 44px;
+        height: 44px;
+      }
+
+      .nav-links {
+        gap: 0.8rem;
+      }
+
+      .nav-links a {
+        font-size: 0.75rem;
+        letter-spacing: 0.5px;
+      }
+
+      .nav-links a.nav-buy,
+      .nav-links a.nav-trial {
+        padding: 0.35rem 0.7rem;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 0.8rem;
+        text-align: center;
+      }
+    }
+    .runtime { justify-content: flex-start; }
+    .runtime .runtime-intro { max-width: 620px; }
+    .runtime .runtime-terms { max-width: 740px; font-weight: 600; margin-bottom: 2rem; }
+    .runtime-downloads { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.2rem; width: 100%; max-width: 1080px; margin-bottom: 2rem; }
+    .runtime-card { display: flex; flex-direction: column; align-items: center; border: 2px solid var(--line-color); border-radius: var(--radius-lg); padding: 1.6rem 1.2rem 1rem; }
+    .runtime-card h2 { font-family: 'Google Sans', sans-serif; font-size: 1.3rem; margin-bottom: 0.8rem; }
+    .runtime-card .download-btn { margin-top: auto; padding: 0.85rem 1rem; font-size: 0.8rem; letter-spacing: 0.5px; }
+    .runtime-card .runtime-platform { font-size: 0.8rem; margin-top: 0.8rem; }
+    .runtime a:not(.download-btn) { color: var(--accent); text-underline-offset: 3px; }
+    .runtime a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+    @media (max-width: 820px) { .runtime-downloads { grid-template-columns: 1fr; max-width: 480px; } }
+    @media (max-width: 480px) { .nav-links { gap: 0.5rem; } .nav-links a { font-size: 0.65rem; } nav .nav-links a.nav-trial, nav .nav-links a.nav-buy { padding: 0.35rem 0.4rem; } }
+  </style>
+  <link rel="stylesheet" href="theme.css">
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">Melowrite</a>
+    <ul class="nav-links">
+      <li><a href="/#features">Features</a></li>
+      <li><a href="docs" class="nav-trial">Docs</a></li>
+      <li><a href="middleware">Middleware</a></li>
+      <li><a href="buy" class="nav-buy">Buy</a></li>
+      <li>
+        <button type="button" class="theme-toggle" aria-label="Switch to dark mode" aria-pressed="false" title="Switch to dark mode">
+          <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.9 13.1A9 9 0 0 1 10.9 3.1 9 9 0 1 0 20.9 13.1Z"/></svg>
+          <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <main class="trial runtime">
+    <h1>Free audio middleware</h1>
+    <p class="runtime-intro">Bring Melowrite music and sound effects into your game. Download the runtime for your engine and ship it with your project.</p>
+    <p class="runtime-terms">Free for personal and commercial projects. No royalties, subscription or app purchase required.</p>
+    <div class="runtime-downloads">
+      <article class="runtime-card">
+        <h2>Unity</h2>
+        <p>Unity integration, audio engine and dependencies. Includes a sample scene to get you started.</p>
+        <a href="https://github.com/joeqnicholson/melosite/releases/download/middleware/Melowrite-Unity.zip" class="download-btn" download onclick="if(typeof gtag==='function')gtag('event','middleware_download',{event_label:'unity-win64'});">Download for Unity</a>
+        <p class="runtime-platform">Unity 2021.3+ &middot; Windows x64</p>
+      </article>
+      <article class="runtime-card">
+        <h2>C# / .NET</h2>
+        <p>Managed engine, middleware and host adapters for MonoGame, FNA, SDL and other .NET games.</p>
+        <a href="https://github.com/joeqnicholson/melosite/releases/download/middleware/Melowrite-Middleware-win64.zip" class="download-btn" download onclick="if(typeof gtag==='function')gtag('event','middleware_download',{event_label:'dotnet-win64'});">Download for .NET</a>
+        <p class="runtime-platform">.NET Standard 2.1 &middot; Windows x64</p>
+      </article>
+      <article class="runtime-card">
+        <h2>C / C++</h2>
+        <p>Standalone native engine with a C API. Includes the header, C# P/Invoke bindings and a quickstart.</p>
+        <a href="https://github.com/joeqnicholson/melosite/releases/download/middleware/Melowrite-Engine-win64.zip" class="download-btn" download onclick="if(typeof gtag==='function')gtag('event','middleware_download',{event_label:'native-win64'});">Download native engine</a>
+        <p class="runtime-platform">Native library &middot; Windows x64</p>
+      </article>
+    </div>
+    <p>Each download includes setup instructions, runtime license and third-party notices. You can distribute the runtime with commercial games and keep your own code private.</p>
+    <p><a href="docs#unity">Unity setup guide</a> &middot; <a href="runtime-license.txt">Runtime license</a></p>
+    <p>Want to create and edit .melo music projects? <a href="buy">Get the Melowrite app</a> or <a href="trial">try it free</a>.</p>
+  </main>
+
+  <footer>
+    <span>&copy; 2026 Melowrite</span>
+  </footer>
+
+</body>
+</html>
