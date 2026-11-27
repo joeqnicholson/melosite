@@ -1,0 +1,83 @@
+:root {
+  color-scheme: dark;
+  --background: #161b31;
+  --accent: #6e5b93;
+  --complement: #d03f3f;
+  --line-color: #f8f4f4;
+  --top-bar: #353d62;
+  --header-text: #ffffff;
+  --text: #ffffff;
+  --subtext: #d4d4d4;
+  --line: 2px;
+  --radius: 6px;
+  --radius-lg: 12px;
+}
+
+.nav-links {
+  align-items: center;
+}
+
+nav .nav-links a,
+nav .nav-links a:hover {
+  color: var(--header-text);
+}
+
+nav .nav-links a.nav-trial {
+  border-color: var(--header-text);
+}
+
+nav,
+footer {
+  background: var(--background);
+  border-color: var(--line-color);
+}
+
+nav {
+  background: var(--top-bar);
+}
+
+kbd,
+.docs-content pre,
+.docs-content code {
+  background: var(--complement);
+}
+
+.docs-content pre code {
+  background: none;
+}
+
+.tagline span,
+.feature-label,
+.docs-content h1,
+.docs-content h2,
+.docs-content a,
+.docs-sidebar a.active {
+  color: var(--subtext);
+}
+
+.sc-unbound,
+.docs-placeholder {
+  color: var(--subtext);
+}
+
+footer a:hover {
+  color: var(--text);
+}
+
+@media (max-width: 400px) {
+  nav {
+    padding-inline: 0.75rem;
+  }
+
+  .nav-links {
+    gap: 0.5rem;
+  }
+}
+
+/* Keep the full navigation usable on small screens. */
+@media (max-width: 480px) {
+  nav { gap: 0.75rem; }
+  .nav-links { flex-wrap: wrap; justify-content: flex-end; gap: 0.5rem; }
+  .nav-links a { font-size: 0.65rem; letter-spacing: 0.3px; }
+  nav .nav-links a.nav-trial, nav .nav-links a.nav-buy { padding: 0.35rem 0.4rem; }
+}
